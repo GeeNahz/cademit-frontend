@@ -14,6 +14,10 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
+  hashed_password: {
+    type: String,
+    required: [true, "Password hash is required!"],
+  },
 });
 
 
