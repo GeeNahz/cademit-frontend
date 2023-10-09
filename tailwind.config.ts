@@ -7,6 +7,10 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    fontFamily: {
+      satoshi: ['Satoshi', 'sans-serif'],
+      inter: ["Inter", "sans-serif"],
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -15,6 +19,24 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("daisyui"),
+  ],
+  daisyui: {
+    themes: [
+      {
+        "cademit": {
+          "primary": "#149DF0",
+          "secondary": "#FFFFFF",
+          "accent": "#FCC236",
+          "neutral": "#16333D",
+          "base-100": "",
+        },
+      },
+      "emerald",
+      "light",
+      "dark",
+    ],
+  },
 }
 export default config
