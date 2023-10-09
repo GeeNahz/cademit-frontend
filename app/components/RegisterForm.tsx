@@ -101,36 +101,36 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
                 </p>
             </div>
 
-            <div className="w-fit mx-auto divide-y">
+            <div className="w-[650px] mx-auto divide-y">
 
                 <form onSubmit={handleSubmit} className="py-10 px-3 block space-y-3">
                     <div className="group flex flex-col sm:flex-row gap-5">
                         <label className="block w-full">
                             <span className='text-slate-600 text-sm'>First name <span className="text-red-400">*</span></span>
-                            <input type="text" className='form-input mt-1 block w-full rounded border-transparent focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' placeholder='John' value={formData.first_name} required onChange={(e) => setFormData((prev) => ({ ...prev, first_name: e.target.value }))} />
+                            <input type="text" className='form-input mt-1 block w-full rounded border-zinc-200 focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' placeholder='John' value={formData.first_name} required onChange={(e) => setFormData((prev) => ({ ...prev, first_name: e.target.value }))} />
                         </label>
 
                         <label className="block w-full">
                             <span className='text-slate-600 text-sm'>Last name <span className="text-red-400">*</span></span>
-                            <input type="text" className='form-input mt-1 block w-full rounded border-transparent focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' value={formData.last_name} placeholder='Doe' required onChange={(e) => setFormData(prev => ({ ...prev, last_name: e.target.value }))} />
+                            <input type="text" className='form-input mt-1 block w-full rounded border-zinc-200 focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' value={formData.last_name} placeholder='Doe' required onChange={(e) => setFormData(prev => ({ ...prev, last_name: e.target.value }))} />
                         </label>
                     </div>
 
                     <div className="group flex flex-col sm:flex-row gap-5">
                         <label className="block w-full">
                             <span className='text-slate-600 text-sm'>Email <span className="text-red-400">*</span></span>
-                            <input type="email" className='form-input mt-1 block w-full rounded border-transparent focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' placeholder='example@email.com' required value={formData.email} onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))} />
+                            <input type="email" className='form-input mt-1 block w-full rounded border-zinc-200 focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' placeholder='example@email.com' required value={formData.email} onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))} />
                         </label>
 
                         <label className="block w-full">
                             <span className='text-slate-600 text-sm'>Phone</span>
-                            <input type="tel" className='form-input mt-1 block w-full rounded border-transparent focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' placeholder='+234 567 8901 234' value={formData.phone} onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))} />
+                            <input type="tel" className='form-input mt-1 block w-full rounded border-zinc-200 focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0 placeholder:text-sm' placeholder='+234 567 8901 234' value={formData.phone} onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))} />
                         </label>
                     </div>
 
                     <label className="block w-full">
                         <span className='text-slate-600 text-sm'>Employment status <span className="text-red-400">*</span></span>
-                        <select name="employment-status" id="employment-status" className="form-select w-full block mt-1 rounded border-transparent focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0" onChange={e => setFormData(prev => ({ ...prev, employment_status: e.target.value }))} required>
+                        <select name="employment-status" id="employment-status" className="form-select w-full block mt-1 rounded border-zinc-200 focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0" onChange={e => setFormData(prev => ({ ...prev, employment_status: e.target.value }))} required>
                             <option>-- Select status --</option>
                             {
                                 employmentStatus.map((employment) => (
@@ -142,7 +142,7 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
 
                     <label className="block w-full">
                         <span className='text-slate-600 text-sm'>Course <span className="text-red-400">*</span></span>
-                        <select name="employment-status" id="employment-status" className="form-select w-full block mt-1 rounded border-transparent focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0" onChange={e => setFormData(prev => ({ ...prev, course: e.target.value }))} required>
+                        <select name="employment-status" id="employment-status" className="form-select w-full block mt-1 rounded border-zinc-200 focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0" onChange={e => setFormData(prev => ({ ...prev, course: e.target.value }))} required>
                             <option>-- Select course --</option>
                             {
                                 courseList.map((employment) => (
@@ -171,7 +171,7 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
 
                     <label className="block w-full">
                         <span className='text-slate-600 text-sm'>Method of payment <span className="text-red-400">*</span></span>
-                        <select name="employment-status" id="employment-status" className="form-select w-full block mt-1 rounded border-transparent focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0" value={formData.payment_approach} onChange={(e) => setFormData((prev) => ({ ...prev, payment_approach: e.target.value }))} required>
+                        <select name="employment-status" id="employment-status" className="form-select w-full block mt-1 rounded border-zinc-200 focus:border focus:border-primary-focus focus:bg-transparent focus:ring-0" value={formData.payment_approach} onChange={(e) => setFormData((prev) => ({ ...prev, payment_approach: e.target.value }))} required>
                             <option>-- Select method of payment --</option>
                             {
                                 paymentMethod.map((method) => (
