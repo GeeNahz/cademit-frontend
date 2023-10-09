@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user"
 
 import { connectToDB } from "@/utils/database"
-import { Profile, Session, AuthOptions } from "next-auth/core/types";
+import type { AuthOptions, Session, Profile } from "next-auth";
 
 type ProfilePlus = Profile & {
   username: string;
