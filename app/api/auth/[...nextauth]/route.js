@@ -4,21 +4,21 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user"
 
 import { connectToDB } from "@/utils/database"
-import type { AuthOptions, Session, Profile } from "next-auth";
+// import type { AuthOptions, Session, Profile } from "next-auth";
 
-type ProfilePlus = Profile & {
-  username: string;
-  picture: string;
-}
+// type ProfilePlus = Profile & {
+//   username: string;
+//   picture: string;
+// }
 
-type SessionPlus = Session & {
-  user?: {
-    id?: string | null;
-    name?: string | null
-    email?: string | null
-    image?: string | null
-  }
-}
+// type SessionPlus = Session & {
+//   user?: {
+//     id?: string | null;
+//     name?: string | null
+//     email?: string | null
+//     image?: string | null
+//   }
+// }
 
 // export const authOptions: AuthOptions = ;
 
@@ -35,7 +35,7 @@ const handler = NextAuth({
         email: session?.user?.email,
       });
   
-      (session as SessionPlus).user!.id = sessionUser._id.toString();
+      session.user.id = sessionUser._id.toString();
   
       return session;
     },
@@ -52,8 +52,8 @@ const handler = NextAuth({
         if (!userExists) {
           await User.create({
             email: profile?.email,
-            username: (profile as ProfilePlus)?.username.replace(" ", "").toLowerCase(),
-            image: (profile as ProfilePlus)?.picture,
+            username: profile?.username.replace(" ", "").toLowerCase(),
+            image: profile.picture,
           });
         }
   
