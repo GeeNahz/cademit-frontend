@@ -1,5 +1,5 @@
 import { AcademicCapIcon, UserGroupIcon, BookmarkIcon } from "@heroicons/react/24/outline";
-import { IconObj } from "../types";
+import { IconObj } from "@/app/types";
 import { useGetIcon } from "@/utils/getIcon";
 
 interface Props {
