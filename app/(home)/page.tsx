@@ -11,7 +11,7 @@ import Image from 'next/image'
 import HeroSection from "./components/HeroSection"
 import SectionOne from "./components/SectionOne";
 import Statistic from './components/Statistics';
-import Courses from "../components/CourseCateogry";
+import Courses from "../components/CourseCategory";
 import Testimonials from "../components/Testimonials";
 import Blogs from './components/Blogs';
 import Newsletter from '../components/Newsletter';
