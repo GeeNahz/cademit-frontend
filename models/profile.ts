@@ -49,6 +49,14 @@ const ProfileSchema = new Schema({
     type: String,
     required: [true, "The method of payment is required!"]
   },
+  module: {
+    type: String,
+    required: [true, "Module field is requried!"],
+  },
+  paid: {
+    type: Boolean,
+    required: [true, "Paid field is required!"],
+  },
 });
 
 ProfileSchema.methods.full_name = function full_name() {
