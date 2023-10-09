@@ -9,7 +9,7 @@ export default function HomeLayout({
   children: React.ReactNode
 }) {
   return (
-      <section className="font-inter">
+      <section className="font-inter bg-[#F8F8F8] text-neutral">
         <Navbar />
         {children}
         <Footer />
