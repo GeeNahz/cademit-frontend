@@ -92,7 +92,7 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
     }
 
     return (
-        <div className="h-full w-full py-40 px-5 md:px-0">
+        <div className="h-full w-full py-20 px-5 md:px-0">
 
             <div className="title mb-5 text-center">
                 <h1 className="text-4xl font-bold mb-5">{ formTitle }</h1>
