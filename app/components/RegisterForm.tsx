@@ -143,7 +143,7 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
                 </p>
             </div>
 
-            <div className="w-[650px] mx-auto divide-y">
+            <div className="w-full sm:w-[650px] mx-auto divide-y">
 
                 <form onSubmit={handleSubmit} className="py-10 px-3 block space-y-3">
                     <div className="group flex flex-col sm:flex-row gap-5">
