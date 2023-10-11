@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/20/solid"
@@ -17,6 +17,12 @@ export default function Navbar() {
     function closeMenubar() {
         setIsOpen(false);
     }
+
+    useEffect(() => {
+        let body = document.getElementsByTagName("body")[0] as HTMLBodyElement;
+        isOpen ? body.style.overflowY = "hidden" : body.style.overflowY = "scroll";
+    }, [isOpen]);
+    
 
     return (
         <header className="text-neutral h-fit z-20 shadow-sm lg:shadow w-full sticky top-0">
@@ -80,7 +86,7 @@ export default function Navbar() {
                             className="fixed z-40 top-8 w-20 bg-neutral hover:cursor-pointer peer opacity-0"
                         />
 
-                        <div className="opacity-30 z-10 h-screen -left-[150%] peer-checked:-left-5 peer-checked:opacity-100 transition-all duration-300 w-fit absolute top-20 bottom-0 border-none outline-none">
+                        <div className="opacity-30 z-10 h-screen hidden -left-[150%] peer-checked:-left-5 peer-checked:opacity-100 peer-checked:block transition-all duration-300 delay-100 w-fit absolute top-20 bottom-0 border-none outline-none">
                             <div className="z-50 h-full bg-white glass bg-opacity-70 relative">
                                 <ul className="space-y-10 text-start p-10 w-72 sm:w-96">
                                     <li>
