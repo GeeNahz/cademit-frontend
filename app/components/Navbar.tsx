@@ -96,11 +96,11 @@ export default function Navbar() {
                                         <div className="hover:text-primary transition-colors duration-200 group w-full">
                                             <label tabIndex={0} className="m-1">Services <ChevronDownIcon className="inline h-5 w-5" /></label>
                                             <p tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow-md bg-stone-100 rounded-box w-fit group-hover:text-neutral whitespace-nowrap">
-                                                <Link href="/signup/pg-cohort" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3">PG Cohort Signup</Link>
-                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3">Support</Link>
-                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3">Community</Link>
-                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3">Hackathon</Link>
-                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3">Certifications and Accreditations</Link>
+                                                <Link href="/signup/pg-cohort" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3" onClick={closeMenubar}>PG Cohort Signup</Link>
+                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3" onClick={closeMenubar}>Support</Link>
+                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3" onClick={closeMenubar}>Community</Link>
+                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3" onClick={closeMenubar}>Hackathon</Link>
+                                                <Link href="/" className="w-full hover:text-primary hover:bg-white transition-colors my-px rounded-lg py-2 px-3" onClick={closeMenubar}>Certifications and Accreditations</Link>
                                             </p>
                                         </div>
                                     </li>
