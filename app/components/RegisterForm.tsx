@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState, useEffect } from "react";
+import Paystack from "./Paystack";
 
 
 const PAYMENT_APPROACH = {
@@ -133,6 +134,10 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
         }
     }
 
+    function generateReferenceKey(data: FormDataType) {
+        return (new Date()).getDate.toString() + "-" + data.first_name.substring(0,2) + "-" + (new Date()).getMilliseconds().toLocaleString()
+    }
+
     return (
         <div className="h-full w-full py-20 px-5 md:px-0">
 
@@ -234,7 +239,7 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
                                         courseModules.map((module) => (
                                             <div key={module.id}>
                                                 <label className="inline-flex items-center mt-2">
-                                                    <input className="form-radio focus:ring-0" type="radio" name="experience-level" value={module.name} required onChange={(e) => setFormData((prev) => ({ ...prev, module: e.target.value }))} />
+                                                    <input className="form-radio focus:ring-0" type="radio" name="module" value={module.name} required onChange={(e) => setFormData((prev) => ({ ...prev, module: e.target.value }))} />
                                                     <p className=" text-sm ml-2">{module.name}</p>
                                                 </label>
                                             </div>
@@ -274,8 +279,13 @@ function RegisterForm({ submitUrl, formTitle, formDesc, formFooter }: PropsType)
                         </div>
                     </label>
 
-                    <div className="action">
+                    <div className="action divide-y-2">
                         <button type="submit" className="btn btn-primary btn-block mt-5">Sign up</button>
+                        <Paystack
+                            amount={price}
+                            email={formData.email}
+                            reference={generateReferenceKey(formData)}
+                        />
                     </div>
 
                 </form>
