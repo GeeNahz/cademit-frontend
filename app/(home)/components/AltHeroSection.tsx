@@ -13,7 +13,7 @@ const AltHeroSection = () => {
             stringsElement: typedStrings.current as Element,
             typeSpeed: 30,
             backSpeed: 10,
-            backDelay: 800,
+            backDelay: 1800,
             cursorChar: "|",
             loop: true,
         })
@@ -28,9 +28,9 @@ const AltHeroSection = () => {
             <div>
                 <h1 className="p-6 font-extrabold leading-[1] tracking-tighter hero-title-font-size gradient-text">The Tech Plug <span className="block md:hidden"></span> 
                 <div className="hidden" ref={typedStrings}>
-                    <p>You Can Trust.</p>
-                    <p>that is Guranteed.</p>
-                    <p>For Everyone.</p>
+                    <p>You Can Trust</p>
+                    <p>that is Guranteed</p>
+                    <p>For Everyone</p>
                 </div>
                 <span ref={typedEl}></span></h1>
 
