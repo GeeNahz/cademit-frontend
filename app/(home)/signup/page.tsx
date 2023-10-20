@@ -5,6 +5,7 @@ interface Option {
     title: string;
     imageUrl: string;
     link: string;
+    isActive: boolean;
 }
 
 const Signup = () => {
@@ -14,18 +15,21 @@ const Signup = () => {
             title: "School/Parent",
             imageUrl: "/images/parent-illustration.avif",
             link: "/signup/school-parent",
+            isActive: false,
         },
         {
             id: 2,
             title: "Educator",
             imageUrl: "/images/tutor-illustration.avif",
             link: "/signup/educator",
+            isActive: false,
         },
         {
             id: 3,
             title: "Individual",
             imageUrl: "/images/individual-illustration.avif",
             link: "/signup/individual",
+            isActive: true,
         },
     ];
 
@@ -43,6 +47,7 @@ const Signup = () => {
                             title={option.title}
                             imageUrl={option.imageUrl}
                             link={option.link}
+                            isActive={option.isActive}
                         />
                     ))
                 }
