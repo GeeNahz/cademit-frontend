@@ -87,8 +87,8 @@ export default function Navbar() {
                             className="fixed z-40 top-5 w-16 bg-neutral hover:cursor-pointer peer opacity-0"
                         />
 
-                        <div className="opacity-30 z-10 h-screen hidden -left-[150%] peer-checked:-left-5 peer-checked:opacity-100 peer-checked:block transition-all duration-300 delay-100 w-fit absolute top-20 bottom-0 border-none outline-none">
-                            <div className="z-50 h-full bg-white glass bg-opacity-70 relative">
+                        <div className="opacity-30 z-10 h-screen hidden -left-[150%] peer-checked:-left-5 peer-checked:opacity-100 peer-checked:block transition-all duration-300 delay-100 w-fit absolute top-[3.70rem] bottom-0 border-none outline-none">
+                            <div className="z-50 h-full glass bg-opacity-70 relative">
                                 <ul className="space-y-10 text-start p-10 w-72 sm:w-96">
                                     <li>
                                         <Link href="/" onClick={closeMenubar} className="hover:text-primary transition-colors duration-200">Product</Link>
