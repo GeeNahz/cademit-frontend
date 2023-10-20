@@ -8,6 +8,7 @@ import { useGenerateReferenceKey } from "@/app/hooks/keygen";
 import { usePaystack } from "@/app/hooks/paystack";
 
 import RegisterForm from "@/app/components/RegisterForm";
+import Link from "next/link";
 
 
 export default function PgSignup() {
@@ -157,7 +158,7 @@ export default function PgSignup() {
                 setPrice={setAmount}
                 handleSubmit={(ref) => handleSubmit(ref)}
                 formTitle="PG Cohort"
-                formFooter={<span>Sign up for the Data science PG Cohort program. <a href="#" className='link link-info'>Learn more.</a></span>}
+                formFooter={<span>Sign up for the Data science PG Cohort program. <Link href="/signup/pg-cohort/about/" className='link link-info'>Learn more.</Link></span>}
                 message={formMessage}
                 messageType={formMessageType}
                 isLoading={status === FETCH_STATUS.LOADING}
