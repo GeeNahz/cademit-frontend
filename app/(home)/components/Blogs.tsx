@@ -1,5 +1,5 @@
-import CardBlog from "../(main)/blog/components/CardBlog";
-import { Blog } from "../(main)/blog/types";
+import CardBlog from "../blogs/components/CardBlog";
+import { Blog } from "../blogs/types";
 import SectionTitle from "./SectionTitle";
 
 export default function Blogs() {
