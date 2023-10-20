@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -5,11 +6,19 @@ interface Props {
     imageUrl: string;
     title: string;
     link: string;
+    isActive: boolean;
 }
 
-const SignupCard = ({ imageUrl, title, link } : Props) => {
+const SignupCard = ({ imageUrl, title, link, isActive } : Props) => {
+    const LinkStyle = clsx(
+        "card w-full sm:w-96 shadow-xl bg-white hover:bg-primary-content transition-colors duration-200",
+        {
+            "pointer-events-none opacity-40": !isActive
+        }
+    );
+    
     return (
-        <Link href={link} className="card w-full sm:w-96 shadow-xl bg-white hover:bg-primary-content transition-colors duration-200">
+        <Link href={link} className={LinkStyle}>
             <div className="min-h-[140px]">
                 <figure className="px-10 pt-10 w-auto h-auto aspect-auto">
                     <Image
