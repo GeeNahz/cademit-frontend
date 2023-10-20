@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import ProgressBarProvider from './components/ProgressBarProvider'
 // import { Inter } from 'next/font/google'
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -16,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="cademit">
-      <body className={"font-inter"}>{children}</body>
+      <body className={"font-inter"}>
+        <ProgressBarProvider>{children}</ProgressBarProvider>
+      </body>
     </html>
   )
 }
