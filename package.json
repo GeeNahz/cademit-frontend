@@ -12,7 +12,6 @@
     "@auth/mongodb-adapter": "^2.0.1",
     "@ckeditor/ckeditor5-react": "^6.1.0",
     "@heroicons/react": "^2.0.18",
-    "@paystack/inline-js": "^2.13.0",
     "bcrypt": "^5.1.1",
     "ckeditor5-custom-build": "file:ckeditor5-40.0.0",
     "clsx": "^2.0.0",
