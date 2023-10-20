@@ -125,6 +125,28 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+/*  */
+.head_text {
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl;
+}
+
+.blue_gradient {
+  @apply bg-gradient-to-r from-blue-600 to-sky-600 bg-clip-text text-transparent;
+}
+
+.desc {
+  @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
+}
+
+.glassmorphism {
+  @apply rounded-xl bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
+}
+
+.form_input {
+  @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0 border-0;
+}
+
+/*  */
 
 .hero-title-font-size {
   font-size: var(--title-font-size);
