@@ -108,7 +108,7 @@ function RegisterForm({ formData, price, setPrice, setFormData, handleSubmit, fo
     );
 
     const messageStyle = clsx(
-        "text-xs text-center py-2 px-3 rounded-md my-3",
+        "text-sm text-center text-semibold py-2 px-3 rounded-md my-3",
         {
             "bg-sky-100 text-sky-400 border border-sky-400": messageType === "info",
             "bg-teal-100 text-teal-400 border border-teal-400": messageType === "success",
