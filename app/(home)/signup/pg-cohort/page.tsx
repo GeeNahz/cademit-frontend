@@ -12,6 +12,7 @@ import Link from "next/link";
 
 
 export default function PgSignup() {
+    const [isLoaded, setIsLoaded] = useState(false);
     const [data, setData] = useState<FormDataType>({
         first_name: "",
         last_name: "",
@@ -32,6 +33,10 @@ export default function PgSignup() {
     const [error, setError] = useState<any>(null);
     const [formMessage, setFormMessage] = useState<string | any>("");
     const [formMessageType, setFormMessageType] = useState<StatusType>("idle");
+
+    useEffect(() => {
+        if (!isLoaded) setIsLoaded(true);
+    }, []);
 
     function formMessageDefaultStates() {
         setFormMessage("");
@@ -151,18 +156,26 @@ export default function PgSignup() {
 
     return (
         <>
-            <RegisterForm
-                formData={data}
-                setFormData={setData}
-                price={amount}
-                setPrice={setAmount}
-                handleSubmit={(ref) => handleSubmit(ref)}
-                formTitle="PG Cohort"
-                formFooter={<span>Sign up for the Data science PG Cohort program. <Link href="/signup/pg-cohort/about/" className='link link-info'>Learn more.</Link></span>}
-                message={formMessage}
-                messageType={formMessageType}
-                isLoading={status === FETCH_STATUS.LOADING}
-            />
+            {
+                isLoaded
+                    ? (<RegisterForm
+                        formData={data}
+                        setFormData={setData}
+                        price={amount}
+                        setPrice={setAmount}
+                        handleSubmit={(ref) => handleSubmit(ref)}
+                        formTitle="PG Cohort"
+                        formFooter={<span>Sign up for the Data science PG Cohort program. <Link href="/signup/pg-cohort/about/" className='link link-info'>Learn more.</Link></span>}
+                        message={formMessage}
+                        messageType={formMessageType}
+                        isLoading={status === FETCH_STATUS.LOADING}
+                    />)
+                    : (
+                        <div className="min-h-16 flex items-center justify-center font-medium text-stone-400">
+                            <p>Please wait...</p>
+                        </div>
+                    )
+            }
         </>
     )
 }
