@@ -48,3 +48,16 @@ export type FormDataType = {
 }
 
 export type StatusType = "info" | "success" | "error" | "idle";
+
+export type StudentRecord = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string;
+  employment_status: string;
+  course: string;
+  experience_level: number;
+  computer_access: boolean;
+  internet_access: boolean;
+  use_workspace: boolean;
+};
