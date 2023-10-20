@@ -10,15 +10,15 @@ interface Props {
 const SignupCard = ({ imageUrl, title, link } : Props) => {
     return (
         <Link href={link} className="card w-full sm:w-96 shadow-xl bg-white hover:bg-primary-content transition-colors duration-200">
-            <div className="min-h-[340px]">
-                <figure className="px-10 pt-10">
+            <div className="min-h-[140px]">
+                <figure className="px-10 pt-10 w-auto h-auto aspect-auto">
                     <Image
                         src={imageUrl}
                         alt={title}
                         width={305}
                         height={304}
                         fill={false}
-                        className="rounded-xl w-auto h-auto"
+                        className="rounded-xl w-auto h-auto aspect-video"
                     />
                 </figure>
             </div>
