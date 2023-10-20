@@ -30,13 +30,13 @@ export default function Navbar() {
             <div className="bg-white bg-opacity-60 glass z-50 relative h-full flex items-center">
                 <div className="container flex justify-between items-center mx-auto">
                     <div className="flex gap-5 items-center">
-                        <div className="logo transform translate-y-2">
-                            <Link href="/" className="w-[145px] h-[51.55px]">
+                        <div className="logo transform translate-y-1">
+                            <Link href="/" className="w-[125px] h-[31.55px]">
                                 <img
                                     src="/logo.png"
                                     alt="CADEMit"
-                                    width="145"
-                                    height="51.55"
+                                    width="125"
+                                    height="31.55"
                                 />
                             </Link>
                         </div>
