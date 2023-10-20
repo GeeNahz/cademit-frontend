@@ -44,6 +44,7 @@ const Signup = () => {
                 {
                     signupOptions.map((option) => (
                         <SignupCard
+                            key={option.id}
                             title={option.title}
                             imageUrl={option.imageUrl}
                             link={option.link}
