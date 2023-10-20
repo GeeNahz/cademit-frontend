@@ -1,7 +1,8 @@
 import { Schema, models, model } from "mongoose";
 
+import type { FormDataType } from "@/app/types";
 
-const ProfileSchema = new Schema({
+const ProfileSchema = new Schema<FormDataType>({
   first_name: {
     type: String,
     required: [true, "First name is required!"],
@@ -14,7 +15,7 @@ const ProfileSchema = new Schema({
   },
   email: {
     type: String,
-    unique: [true, "Email address already in use!"],
+    // unique: [true, "Email address already in use!"],
     required: [true, "Email address is required!"],
   },
   phone: {
@@ -56,6 +57,10 @@ const ProfileSchema = new Schema({
   paid: {
     type: Boolean,
     required: [true, "Paid field is required!"],
+  },
+  reference: {
+    type: String,
+    required: [true, "Reference field is required!"],
   },
 });
 
