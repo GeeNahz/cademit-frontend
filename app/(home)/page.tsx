@@ -15,12 +15,14 @@ import Courses from "../components/CourseCategory";
 import Testimonials from "../components/Testimonials";
 import Blogs from './components/Blogs';
 import Newsletter from '../components/Newsletter';
+import AltHeroSection from './components/AltHeroSection';
 
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <div className="hero-section h-fit w-full">
-        <HeroSection />
+        {/* <HeroSection /> */}
+        <AltHeroSection />
       </div>
       <div className="first-section">
         <SectionOne />
