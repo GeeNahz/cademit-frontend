@@ -84,7 +84,7 @@ export default function Navbar() {
                             id="menu-toggle"
                             checked={isOpen}
                             onChange={changeIsOpenState}
-                            className="fixed z-40 top-8 w-20 bg-neutral hover:cursor-pointer peer opacity-0"
+                            className="fixed z-40 top-5 w-16 bg-neutral hover:cursor-pointer peer opacity-0"
                         />
 
                         <div className="opacity-30 z-10 h-screen hidden -left-[150%] peer-checked:-left-5 peer-checked:opacity-100 peer-checked:block transition-all duration-300 delay-100 w-fit absolute top-20 bottom-0 border-none outline-none">
