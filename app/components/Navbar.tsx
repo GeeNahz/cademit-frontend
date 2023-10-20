@@ -22,17 +22,18 @@ export default function Navbar() {
         let body = document.getElementsByTagName("body")[0] as HTMLBodyElement;
         isOpen ? body.style.overflowY = "hidden" : body.style.overflowY = "scroll";
     }, [isOpen]);
-    
+
 
     return (
-        <header className="text-neutral h-fit z-20 shadow-sm lg:shadow w-full sticky top-0">
-            <div className="bg-white bg-opacity-60 glass z-50 relative">
-                <div className="container flex justify-between items-center h-20 mx-auto">
+        // <header className="text-neutral h-fit z-20 shadow-sm lg:shadow w-full sticky top-0">
+        <nav className="h-[3.75rem] w-full text-sm sticky top-0 z-50 border border-b border-b-stone-100">
+            <div className="bg-white bg-opacity-60 glass z-50 relative h-full flex items-center">
+                <div className="container flex justify-between items-center mx-auto">
                     <div className="flex gap-5 items-center">
                         <div className="logo transform translate-y-2">
                             <Link href="/" className="w-[145px] h-[51.55px]">
                                 <img
-                                    src="/logo.png" 
+                                    src="/logo.png"
                                     alt="CADEMit"
                                     width="145"
                                     height="51.55"
@@ -68,8 +69,8 @@ export default function Navbar() {
                     </div>
 
                     <div className="ctas hidden lg:flex gap-5">
-                        <Link href="/signup" className="btn btn-primary">Sign up</Link>
-                        <a href="#" className="btn btn-primary btn-outline">Sign in</a>
+                        <Link href="/signup" className="font-medium btn btn-primary bg-sky-500 hover:bg-sky-600 active:bg-sky-600">Sign up</Link>
+                        <Link href="#" className="font-medium btn btn-outline text-stone-700 border-stone-300 hover:bg-stone-200">Sign in</Link>
                     </div>
 
                     <div className="block lg:hidden">
@@ -123,6 +124,7 @@ export default function Navbar() {
                 </div>
             </div>
             <Backdrop onClick={closeMenubar} isActive={isOpen} />
-        </header>
+        </nav>
+        // </header>
     );
 }
