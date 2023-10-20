@@ -69,8 +69,8 @@ export default function Navbar() {
                     </div>
 
                     <div className="ctas hidden lg:flex gap-5">
-                        <Link href="/signup" className="font-medium btn btn-primary bg-sky-500 hover:bg-sky-600 active:bg-sky-600">Sign up</Link>
-                        <Link href="#" className="font-medium btn btn-outline text-stone-700 border-stone-300 hover:bg-stone-200">Sign in</Link>
+                        <Link href="/signup" className="font-medium py-2 px-4 btn-primary bg-sky-500 hover:bg-sky-600 active:bg-sky-600 rounded transition-all">Sign up</Link>
+                        <Link href="#" className="font-medium py-2 px-4 btn-outline text-stone-700 border border-stone-300 hover:bg-stone-200 rounded transition-all">Sign in</Link>
                     </div>
 
                     <div className="block lg:hidden">
