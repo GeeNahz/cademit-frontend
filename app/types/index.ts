@@ -61,3 +61,27 @@ export type StudentRecord = {
   internet_access: boolean;
   use_workspace: boolean;
 };
+
+export type FormSelectOptions = {
+  id?: string | number;
+  name?: string;
+  title: string;
+  value: string | number | boolean;
+};
+
+export type FormFieldProps = {
+  placeholder?: string;
+  id?: string;
+  classes?: string;
+  required?: boolean;
+};
+
+export type FormField = {
+  type: string;
+  label: string;
+  value: string | number | boolean;
+  fieldName: string;
+  fieldProps?: FormFieldProps;
+  selectOptions?: FormSelectOptions[];
+  // selectOptions?: {[key: string]: any}[];
+};
