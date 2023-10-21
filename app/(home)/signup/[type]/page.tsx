@@ -198,7 +198,7 @@ export default function SignupPage() {
 
                 setTimeout(() => {
                     router.push("/");
-                }, 3000);
+                }, 5000);
             } else {
                 throw new Error(`${response.statusText}`);
             }
