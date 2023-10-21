@@ -100,14 +100,16 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
 
 export default function Form({ type, header, desc, fields, submitting, data, message, messageType, setData, handleSubmit, }: FormProps) {
     const formEl = useRef<HTMLFormElement>(null);
-    
+
     const [isValid, setIsValid] = useState(false);
     useEffect(() => {
-      console.log("Changed data.");
-      
-      return () => {}
+        if (formEl.current?.checkValidity()) {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
+        }
     }, [data]);
-    
+
     const messageStyle = clsx(
         "text-center text-xs sm:text-sm font-inter font-semibold py-2 mt-2 border rounded",
         {
@@ -120,7 +122,7 @@ export default function Form({ type, header, desc, fields, submitting, data, mes
     const btnStyle = clsx(
         "px-5 py-3 text-base font-semibold bg-amber-500 hover:bg-accent-focus active:bg-accent-content transition-colors duration-200 rounded-md text-white w-full",
         {
-            "text-neutral btn-outline opacity-50 pointer-events-none": !isValid || submitting,
+            "text-neutral opacity-50 pointer-events-none": !isValid || submitting,
             "text-inherit btn-success": isValid,
         },
     );
