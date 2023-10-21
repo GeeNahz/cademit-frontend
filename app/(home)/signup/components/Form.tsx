@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, FormEvent, SetStateAction, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
 import { FormField, FormSelectOptions, INPUT_TYPES } from "@/app/types";
@@ -99,6 +99,15 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
 }
 
 export default function Form({ type, header, desc, fields, submitting, data, message, messageType, setData, handleSubmit, }: FormProps) {
+    const formEl = useRef<HTMLFormElement>(null);
+    
+    const [isValid, setIsValid] = useState(false);
+    useEffect(() => {
+      console.log("Changed data.");
+      
+      return () => {}
+    }, [data]);
+    
     const messageStyle = clsx(
         "text-center text-xs sm:text-sm font-inter font-semibold py-2 mt-2 border rounded",
         {
@@ -106,6 +115,14 @@ export default function Form({ type, header, desc, fields, submitting, data, mes
             "bg-green-100 text-green-500 border-green-400": messageType === "success",
             "bg-red-100 text-red-500 border-red-400": messageType === "error",
         }
+    );
+
+    const btnStyle = clsx(
+        "px-5 py-3 text-base font-semibold bg-amber-500 hover:bg-accent-focus active:bg-accent-content transition-colors duration-200 rounded-md text-white w-full",
+        {
+            "text-neutral btn-outline opacity-50 pointer-events-none": !isValid || submitting,
+            "text-inherit btn-success": isValid,
+        },
     );
 
     return (
@@ -118,6 +135,7 @@ export default function Form({ type, header, desc, fields, submitting, data, mes
             </p>
 
             <form
+                ref={formEl}
                 onSubmit={handleSubmit}
                 className="mt-10 w-full max-w-2xl flex flex-col gap-5 glassmorphism"
             >
@@ -133,7 +151,7 @@ export default function Form({ type, header, desc, fields, submitting, data, mes
                 }
 
                 <div className="mt-4 gap-4 w-full">
-                    <button type="submit" disabled={submitting} className="px-5 py-3 text-base font-semibold bg-amber-500 hover:bg-accent-focus active:bg-accent-content transition-colors duration-200 rounded-md text-white w-full">
+                    <button type="submit" disabled={submitting} className={btnStyle}>
                         {submitting ? <i>{type}...</i> : `${type}`}
                     </button>
                 </div>
