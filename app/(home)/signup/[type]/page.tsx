@@ -82,6 +82,9 @@ export default function SignupPage() {
             },
             selectOptions: [
                 { id: 1, title: "Data Science", value: "Data Science" },
+                { id: 2, title: "Frontend Development", value: "Frontend Development" },
+                { id: 3, title: "Backend Development", value: "Backend Development" },
+                { id: 4, title: "UI/UX Design", value: "UI/UX Design" },
             ],
         },
         {
@@ -143,7 +146,7 @@ export default function SignupPage() {
             },
         },
     ];
-    
+
     const params = useParams();
     function assignSignupUrl() {
         switch (params.type) {
@@ -198,7 +201,7 @@ export default function SignupPage() {
                 }, 3000);
             } else {
                 throw new Error(`${response.statusText}`);
-            }            
+            }
         } catch (error) {
             assingMessage(`${error}. Please try again later.`, "error");
         } finally {
