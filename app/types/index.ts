@@ -28,6 +28,17 @@ export const FETCH_STATUS = {
   ERROR: "error",
 };
 
+export const INPUT_TYPES = {
+  TEXT: "text",
+  NUMBER: "number",
+  EMAIL: "email",
+  TEL: "tel",
+  PASSWORD: "password",
+  CHECKBOX: "checkbox",
+  RADIO: "radio",
+  SELECT: "select",
+};
+
 export type PaymentApproach = "Full payment" | "Pay per module" | "";
 
 export type FormDataType = {
