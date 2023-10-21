@@ -22,7 +22,7 @@ export const POST = async (req: Request) => {
     const payload = { first_name, last_name, email, phone, course, employment_status, experience_level, computer_access, internet_access, use_workspace };
 
     const student = new Student({ ...payload });
-    student.save();
+    await student.save();    
 
     return new Response(JSON.stringify(payload), { status: 201 });
   } catch (error) {
