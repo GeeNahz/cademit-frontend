@@ -81,9 +81,9 @@ export default function SignupPage() {
             },
             selectOptions: [
                 { id: 1, title: "Data Science", value: "Data Science" },
-                { id: 2, title: "Frontend Development", value: "Frontend Development" },
-                { id: 3, title: "Backend Development", value: "Backend Development" },
-                { id: 4, title: "UI/UX Design", value: "UI/UX Design" },
+                { id: 2, title: "Frontend Web Development", value: "Frontend Development" },
+                { id: 3, title: "Backend Web Development", value: "Backend Development" },
+                { id: 4, title: "UI / UX Design", value: "UI/UX Design" },
             ],
         },
         {
@@ -111,10 +111,10 @@ export default function SignupPage() {
                 required: true,
             },
             selectOptions: [
-                { id: 1, title: "(I'm new to this field and have no idea)", value: 0 },
-                { id: 2, title: "(I have a little idea but don't know what to do)", value: 1 },
-                { id: 3, title: "(I have idea and want to build it)", value: 2 },
-                { id: 4, title: "(I have good knowledge and want to advance)", value: 3 },
+                { id: 1, title: "0 (I'm new to this field and have no idea)", value: 0 },
+                { id: 2, title: "1 (I have a little idea but don't know what to do)", value: 1 },
+                { id: 3, title: "2 (I have idea and want to build it)", value: 2 },
+                { id: 4, title: "3 (I have good knowledge and want to advance)", value: 3 },
             ],
         },
         {
