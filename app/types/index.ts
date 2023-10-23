@@ -67,6 +67,7 @@ export type StudentRecord = {
   phone?: string;
   employment_status: string;
   course: string;
+  purpose: string;
   experience_level: number;
   computer_access: boolean;
   internet_access: boolean;
