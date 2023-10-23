@@ -21,6 +21,7 @@ export default function SignupPage() {
         computer_access: false,
         internet_access: false,
         use_workspace: false,
+        purpose: "",
     });
     const [submitting, setSubmitting] = useState(false);
     const [message, setMessage] = useState("");
