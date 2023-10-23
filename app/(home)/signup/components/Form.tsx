@@ -40,6 +40,24 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
                     />
                 </label>
             );
+        case INPUT_TYPES.TEXTAREA:
+            return (
+                <label key={field.fieldName} htmlFor={field.fieldProps?.id} className="w-full">
+                    <span className="font-satoshi font-semibold text-base text-gray-700">{field.label}</span>
+
+                    <textarea
+                        name={field.fieldName}
+                        id={field.fieldProps?.id}
+                        cols={30}
+                        rows={10}
+                        value={field.value as string}
+                        onChange={(e) => setData({ ...data, [field.fieldName]: e.target.value })}
+                        required={field.fieldProps?.required}
+                        placeholder={field.fieldProps?.placeholder}
+                        className="form_textarea"
+                    ></textarea>
+                </label>
+            );
         case INPUT_TYPES.RADIO:
             return (
                 <label key={field.fieldName}>
