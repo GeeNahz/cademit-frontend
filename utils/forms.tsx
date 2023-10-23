@@ -55,7 +55,7 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
                                   onChange={(e) => setData({ ...data, [field.fieldName]: parseInt(e.target.value) })}
                                   required
                               />
-                              <span className="ml-3">{option.value} &nbsp; {option.title}</span>
+                              <span className="ml-3">{option.title}</span>
                           </div>
                       ))
                   }
