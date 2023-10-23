@@ -64,7 +64,7 @@ export default function Form({ type, header, desc, fields, submitting, data, mes
                 className="mt-10 w-full max-w-2xl flex flex-col gap-5 glassmorphism"
             >
                 {
-                    fields.map((field, idx) => generateFormFields(field, data, setData, idx))
+                    fields.map((field, index) => generateFormFields(field, data, setData, index))
                 }
 
                 {
