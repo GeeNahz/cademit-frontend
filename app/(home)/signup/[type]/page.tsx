@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
-import Form from "../components/Form";
+import Form from "@/app/components/Form";
 
 import type { FormField, StatusType, StudentRecord } from "@/app/types";
 // type SignUpType = "school-parent" | "educator" | "individual";
