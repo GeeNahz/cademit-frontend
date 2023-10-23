@@ -68,9 +68,10 @@ export default function PgSignup() {
     const router = useRouter();
     const submitUrl = "/api/pg-cohort/signup";
 
-    async function verifyEmail(): Promise<boolean> {
+    async function verifyEmail(email: string): Promise<boolean> {
+        const data = { email };
         try {
-            let emailResponse = await fetch("/api/pg-cohort/verify-email", {
+            let emailResponse = await fetch("/api/verify-email", {
                 method: "POST",
                 body: JSON.stringify(data),
             });
@@ -144,7 +145,7 @@ export default function PgSignup() {
 
         setStatus(FETCH_STATUS.LOADING);
 
-        const emailExists = await verifyEmail();
+        const emailExists = await verifyEmail(data.email);
 
         if (emailExists) {
             setStatus(FETCH_STATUS.ERROR);
