@@ -30,6 +30,7 @@ export const FETCH_STATUS = {
 
 export const INPUT_TYPES = {
   TEXT: "text",
+  TEXTAREA: "textarea",
   NUMBER: "number",
   EMAIL: "email",
   TEL: "tel",
