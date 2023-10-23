@@ -19,6 +19,10 @@ const StudentSchema = new Schema<StudentRecord>({
     type: String,
     required: [true, "Course is required!"],
   },
+  purpose: {
+    type: String,
+    required: [true, "Purpose field is required!"],
+  },
   phone: {
     type: String,
   },
