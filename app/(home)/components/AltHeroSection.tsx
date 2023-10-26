@@ -24,7 +24,7 @@ const AltHeroSection = () => {
     }, []);
     
     return (
-        <main className="min-h-[480px] sm:min-h-[500px] md:min-h-[550px] lg:min-h-[580px] xl:min-h-[720px] w-full max-w-[calc(1234px + 56px * 2)] text-center mt-0 sm:mt-20 mb-0 mx-auto py-0 px-[32px] sm:px-[56px] overflow-hidden isolate border-b border-stone-300 flex flex-col items-center justify-center">
+        <main className="min-h-[480px] sm:min-h-[500px] md:min-h-[550px] lg:min-h-[580px] xl:min-h-[720px] w-full max-w-[calc(1234px + 56px * 2)] text-center m-0 mx-auto py-0 px-[32px] sm:px-[56px] overflow-hidden isolate border-b border-stone-300 flex flex-col items-center justify-center">
             <div>
                 <h1 className="p-6 font-extrabold leading-[1] tracking-tighter hero-title-font-size gradient-text">The Tech Plug <span className="block md:hidden"></span> 
                 <div className="hidden" ref={typedStrings}>
