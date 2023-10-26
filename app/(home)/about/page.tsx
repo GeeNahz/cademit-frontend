@@ -1,3 +1,5 @@
+import type { Metadata } from 'next'
+
 import CardOffers from "@/app/components/CardOffers";
 import AboutHeroSection from "./components/AboutHeroSection";
 
@@ -9,6 +11,13 @@ import { TeamData } from "./types";
 import TeamMemberCard from "./components/TeamMemberCard";
 import Testimonials from "@/app/components/Testimonials";
 import IllustrationTeam from "./components/IllustrationTeam";
+
+let description = "Cademit Enterprise is a registered IT enterprise specializing in Digital Skills education, capacity building, and product development on a mission to build a sustainable startup ecosystem";
+
+export const metadata: Metadata = {
+  title: 'About us',
+  description,
+}
 
 export default function AboutPage() {
   const missionVision = [
