@@ -8,6 +8,7 @@ import SectionTitle from "@/app/components/SectionTitle";
 import { TeamData } from "./types";
 import TeamMemberCard from "./components/TeamMemberCard";
 import Testimonials from "@/app/components/Testimonials";
+import IllustrationTeam from "./components/IllustrationTeam";
 
 export default function AboutPage() {
   const missionVision = [
@@ -26,11 +27,11 @@ export default function AboutPage() {
   const missionVisionIcons: IconObj[] = [
     {
       id: 1,
-      icon: <TbTargetArrow className="h-full w-full"/>
+      icon: <TbTargetArrow className="h-full w-full" />
     },
     {
       id: 2,
-      icon: <TbBulb className="h-full w-full"/>
+      icon: <TbBulb className="h-full w-full" />
     },
   ];
 
@@ -92,7 +93,7 @@ export default function AboutPage() {
                 title={item.title}
                 key={item.id}
               >
-                { useGetIcon(missionVisionIcons, item.id) }
+                {useGetIcon(missionVisionIcons, item.id)}
               </CardOffers>
             ))
           }
@@ -101,19 +102,25 @@ export default function AboutPage() {
 
       <section className="meet-cademit container mx-auto mb-40">
         <div className="title">
-          <SectionTitle subtitle="Meet" textAlign="center" title="CADEMit"/>
+          <SectionTitle subtitle="Meet" textAlign="center" title="CADEMit" />
         </div>
 
-        <div className="meet-cademit flex flex-col lg:flex-row gap-5 items-start">
-          <div className="text w-full bg-slate-300 h-96 rounded-box"></div>
+        <div className="meet-cademit flex flex-col lg:flex-row gap-16 items-center">
+          <div className="text w-full h-full rounded-box">
+            <IllustrationTeam />
+          </div>
 
-          <div className="image w-full bg-slate-300 h-96 rounded-box"></div>
+          <div className="image w-full min-h-fit rounded-box pb-5">
+            <p className="text-gray-600 text-sm xl:text-base text-justify">
+              Cademit Enterprise is a registered IT enterprise specializing in Digital Skills education, capacity building, and product development on a mission to build a sustainable startup ecosystem. Cademit Enterprise, a thriving startup founded in September 2019 by Isreal Okanlawon Olasukunmi, initially focused on training in Computer-aided designs in its early days. However, later pivoted to EdTech, utilizing semester breaks to empower students with essential digital skills such as AutoCAD, Blender, Python programming, App development, and Microsoft Office Suite. Our impact has been significant, having successfully trained over 200 students at the Federal University of Technology Minna, Nigeria. With the support of the Entrepreneurship Center at the university, we have access to facilities that enhance our operations, including human development training, teamwork, and capacity building. Over the years we have engaged with organizations in pioneering ground-breaking projects in product development, child initiative projects (Tech4Young), and supported startup growth on the campus. Cademit is driven by the need to provide hands-on training for young Africans in technological skills to meet the future labour market while igniting new tech innovations, creativity and problem-solving skills.
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="meet-team container mx-auto mb-40">
         <div className="title">
-          <SectionTitle subtitle="Meet" textAlign="center" title="The Team"/>
+          <SectionTitle subtitle="Meet" textAlign="center" title="The Team" />
         </div>
 
         <div className="meet-cademit flex flex-col sm:flex-row flex-wrap gap-5 items-center lg:items-start justify-center">
@@ -126,7 +133,7 @@ export default function AboutPage() {
                   imageUrl={member.imageUrl}
                 />
               </div>
-            ))  
+            ))
           }
         </div>
       </section>
