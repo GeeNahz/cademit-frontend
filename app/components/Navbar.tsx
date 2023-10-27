@@ -62,7 +62,7 @@ export default function Navbar() {
                                     <Link href="/about" className="hover:text-primary transition-colors duration-200">About Us</Link>
                                 </li>
                                 <li>
-                                    <Link href="/blog" className="hover:text-primary transition-colors duration-200">Blogs and News</Link>
+                                    <Link href="/blogs" className="hover:text-primary transition-colors duration-200">Blogs and News</Link>
                                 </li>
                             </ul>
                         </nav>
@@ -109,7 +109,7 @@ export default function Navbar() {
                                         <Link href="/about" onClick={closeMenubar} className="hover:text-primary transition-colors duration-200">About Us</Link>
                                     </li>
                                     <li>
-                                        <Link href="/blog" onClick={closeMenubar} className="hover:text-primary transition-colors duration-200">Blogs and News</Link>
+                                        <Link href="/blogs" onClick={closeMenubar} className="hover:text-primary transition-colors duration-200">Blogs and News</Link>
                                     </li>
                                     <li>
                                         <Link href="/signup" onClick={closeMenubar} className="btn btn-block btn-primary">Sign up</Link>
