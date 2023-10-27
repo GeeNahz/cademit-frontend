@@ -71,7 +71,7 @@ export default function PgSignup() {
     async function verifyEmail(email: string): Promise<boolean> {
         const data = { email };
         try {
-            let emailResponse = await fetch("/api/verify-email", {
+            let emailResponse = await fetch("/api/v1/verify-email", {
                 method: "POST",
                 body: JSON.stringify(data),
             });
