@@ -188,7 +188,7 @@ export default function SignupPage() {
     const router = useRouter();
     async function createStudentRecord() {
         try {
-            const response = await fetch("/api/signup/cohort", {
+            const response = await fetch("/api/v1/signup/cohort", {
                 method: "POST",
                 body: JSON.stringify({
                     ...data,
