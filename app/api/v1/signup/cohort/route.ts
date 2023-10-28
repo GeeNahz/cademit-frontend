@@ -27,12 +27,18 @@ export const POST = async (req: Request) => {
 
   try {
     await connectToDB();
-    
-    const payload: ProspectsRecord = { first_name, last_name, email, gender, phone, course, employment_status, experience_level, purpose, computer_access, internet_access, use_workspace };
 
-    const prospect = await create(Prospect, payload);
+    const emailExists = await Prospect.findOne({ email });
 
-    return new Response(JSON.stringify(prospect), { status: status.HTTP_201_CREATED });
+    if (emailExists) {
+      return new Response("Email already in use", { status: status.HTTP_409_CONFLICT });
+    } else {
+      const payload: ProspectsRecord = { first_name, last_name, email, gender, phone, course, employment_status, experience_level, purpose, computer_access, internet_access, use_workspace };
+
+      const prospect = await create(Prospect, payload);
+
+      return new Response(JSON.stringify(prospect), { status: status.HTTP_201_CREATED });
+    }
   } catch (error) {
     return new Response("An error occured: " + error, { status: status.HTTP_500_INTERNAL_SERVER_ERROR });
   }
