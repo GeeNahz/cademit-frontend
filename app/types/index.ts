@@ -92,6 +92,17 @@ export type ProspectsRecord = {
   use_workspace: boolean;
 };
 
+export type User = {
+  email: string;
+  username: string;
+  gender: Gender;
+  image: string;
+  is_admin: boolean;
+  first_name?: string;
+  last_name?: string;
+  password?: string;
+}
+
 export type FormSelectOptions = {
   id?: string | number;
   name?: string;
