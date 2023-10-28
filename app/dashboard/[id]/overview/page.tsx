@@ -1,8 +1,5 @@
-
-const Overview = () => {
+export default function Overview () {
   return (
     <div>Overview</div>
   )
 }
-
-export default Overview;
