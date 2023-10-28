@@ -18,6 +18,9 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Password hash is required!"],
   },
+  is_admin: {
+    type: Boolean,
+  }
 });
 
 
