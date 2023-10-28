@@ -1,5 +1,6 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+import { CredentialsProvider } from "next-auth/providers";
 
 import User from "@/models/user"
 
@@ -26,11 +27,21 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 // export const authOptions: AuthOptions = ;
 
 const handler = NextAuth({
+  adapter: MongoDBAdapter(clientPromise),
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/signin",
   },
-  adapter: MongoDBAdapter(clientPromise),
   providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      async authorize(credentials, req) {
+        console.log("CREDS: ", credentials);
+        console.log("REQ: ", req);
+
+        return null;
+      },
+    }),
     GoogleProvider({
       clientId: "",
       clientSecret: "",
