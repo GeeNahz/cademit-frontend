@@ -11,12 +11,14 @@ export const connectToDB = async () => {
     return;
   }
 
+  const options = <ConnectOptions>{
+    dbName: process.env.MONGODB_DB_NAME as string,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  };
+  
   try {
-    await mongoose.connect(process.env.MONGODB_URI as string, {
-      dbName: "cademit",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as ConnectOptions);
+    await mongoose.connect(process.env.MONGODB_URI as string, options);
 
     isConnected = true;
     console.log("MongoDB connected");
