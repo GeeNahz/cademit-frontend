@@ -4,6 +4,9 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user"
 
 import { connectToDB } from "@/utils/database"
+import clientPromise from "@/utils/adapters/mongodb";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+
 // import type { AuthOptions, Session, Profile } from "next-auth";
 
 // type ProfilePlus = Profile & {
@@ -23,6 +26,7 @@ import { connectToDB } from "@/utils/database"
 // export const authOptions: AuthOptions = ;
 
 const handler = NextAuth({
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
       clientId: "",
