@@ -1,8 +1,8 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-// import { MongoDBAdapter } from "@auth/mongodb-adapter";
-// import clientPromise from "@/utils/adapters/mongodb";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import clientPromise from "@/utils/adapters/mongodb";
 
 import User from "@/models/user"
 
@@ -10,7 +10,7 @@ import { connectToDB } from "@/utils/database"
 import { useCheckHashPassword } from "@/app/hooks/keygen";
 
 const handler = NextAuth({
-  // adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/signin",
