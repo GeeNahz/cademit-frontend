@@ -26,6 +26,9 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 // export const authOptions: AuthOptions = ;
 
 const handler = NextAuth({
+  pages: {
+    signIn: "/signin",
+  },
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
