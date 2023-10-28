@@ -12,7 +12,7 @@ export const connectToDB = async () => {
   }
 
   const options = <ConnectOptions>{
-    dbName: process.env.MONGODB_DB_NAME as string,
+    dbName: "cademit",
     useNewUrlParser: true,
     useUnifiedTopology: true,
   };
