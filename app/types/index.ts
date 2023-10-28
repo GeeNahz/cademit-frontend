@@ -75,6 +75,23 @@ export type StudentRecord = {
   use_workspace: boolean;
 };
 
+export type Gender = "Male" | "Female" | "Other"
+
+export type ProspectsRecord = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  gender: Gender;
+  phone?: string;
+  employment_status: string;
+  course: string;
+  purpose: string;
+  experience_level: number;
+  computer_access: boolean;
+  internet_access: boolean;
+  use_workspace: boolean;
+};
+
 export type FormSelectOptions = {
   id?: string | number;
   name?: string;

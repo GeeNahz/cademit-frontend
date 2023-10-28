@@ -1,6 +1,7 @@
 import { connectToDB } from "@/utils/database";
-import Student from "@/models/student";
-import { StudentRecord } from "@/app/types";
+import { status } from "@/utils/status";
+import { ProspectsRecord } from "@/app/types";
+import Prospect from "@/models/prospects";
 
 async function create(model: any, payload: any) {
   const newRecord = new model({ ...payload });
@@ -15,6 +16,7 @@ export const POST = async (req: Request) => {
     email,
     phone,
     course,
+    gender,
     employment_status,
     purpose,
     experience_level,
@@ -26,12 +28,12 @@ export const POST = async (req: Request) => {
   try {
     await connectToDB();
     
-    const payload: StudentRecord = { first_name, last_name, email, phone, course, employment_status, experience_level, purpose, computer_access, internet_access, use_workspace };
+    const payload: ProspectsRecord = { first_name, last_name, email, gender, phone, course, employment_status, experience_level, purpose, computer_access, internet_access, use_workspace };
 
-    const student = await create(Student, payload);
+    const prospect = await create(Prospect, payload);
 
-    return new Response(JSON.stringify(student), { status: 201 });
+    return new Response(JSON.stringify(prospect), { status: status.HTTP_201_CREATED });
   } catch (error) {
-    return new Response("An error occured: " + error, { status: 500 });
+    return new Response("An error occured: " + error, { status: status.HTTP_500_INTERNAL_SERVER_ERROR });
   }
 };
