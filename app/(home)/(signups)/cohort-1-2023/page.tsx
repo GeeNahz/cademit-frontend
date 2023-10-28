@@ -183,24 +183,6 @@ export default function SignupPage() {
         }, 5000);
     }
 
-    async function verifyEmail(email: string): Promise<boolean> {
-        const data = { email };
-        try {
-            let emailResponse = await fetch("/api/v1/verify-email", {
-                method: "POST",
-                body: JSON.stringify(data),
-            });
-
-            if (emailResponse.ok) {
-                const data = await emailResponse.json();
-                return data.exists;
-            }
-        } catch (error) {
-            return false;
-        }
-        return false;
-    }
-
     const router = useRouter();
     async function createProspectsRecord() {
         try {
@@ -218,10 +200,19 @@ export default function SignupPage() {
                     router.push("/");
                 }, 5000);
             } else {
-                throw new Error(`${response.statusText}`);
+                let message = "";
+                if (response.status === 409) {
+                    message = "Email already in use";
+                } else {
+                    message = "Internal server error. Please try again later";
+                }
+
+                throw new Error(message);
             }
-        } catch (error) {
-            assingMessage(`${error}. Please try again later.`, "error");
+        } catch (error: any) {
+            let errMessage: string = error.toString().split(":")[1];
+            
+            assingMessage(errMessage, "error");
         } finally {
             setSubmitting(false);
         }
@@ -232,14 +223,7 @@ export default function SignupPage() {
 
         setSubmitting(true);
 
-        const emailExists = await verifyEmail(data.email);
-
-        if (emailExists) {
-            assingMessage("The email provided is already in use.", "error");
-            setSubmitting(false);
-        } else {
-            await createProspectsRecord();
-        }
+        await createProspectsRecord();
     }
 
     return (
