@@ -3,16 +3,17 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-import type { FormField, StatusType, StudentRecord } from "@/app/types";
+import type { FormField, StatusType, ProspectsRecord } from "@/app/types";
 
 import Form from "@/app/components/Form";
 
 export default function SignupPage() {
-    const [data, setData] = useState<StudentRecord>({
+    const [data, setData] = useState<ProspectsRecord>({
         first_name: "",
         last_name: "",
         email: "",
         phone: "",
+        gender: "Male",
         course: "",
         employment_status: "",
         purpose: "",
@@ -69,6 +70,21 @@ export default function SignupPage() {
                 id: "phone_number",
                 required: true,
             },
+        },
+        {
+            type: "select",
+            label: "Gender",
+            value: data.gender,
+            fieldName: "gender",
+            fieldProps: {
+                id: "gender",
+                required: true,
+            },
+            selectOptions: [
+                { id: 1, title: "Male", value: "Male" },
+                { id: 2, title: "Female", value: "Female" },
+                { id: 3, title: "Other", value: "Other" },
+            ],
         },
         {
             type: "select",
@@ -186,7 +202,7 @@ export default function SignupPage() {
     }
 
     const router = useRouter();
-    async function createStudentRecord() {
+    async function createProspectsRecord() {
         try {
             const response = await fetch("/api/v1/signup/cohort", {
                 method: "POST",
@@ -222,7 +238,7 @@ export default function SignupPage() {
             assingMessage("The email provided is already in use.", "error");
             setSubmitting(false);
         } else {
-            await createStudentRecord();
+            await createProspectsRecord();
         }
     }
 
