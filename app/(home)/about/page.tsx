@@ -114,8 +114,8 @@ export default function AboutPage() {
           <SectionTitle subtitle="Meet" textAlign="center" title="CADEMit" />
         </div>
 
-        <div className="meet-cademit flex flex-col lg:flex-row gap-16 items-center">
-          <div className="text w-full h-full rounded-box">
+        <div className="meet-cademit flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+          <div className="text w-full h-full rounded-box mt-10 lg:mt-0">
             <IllustrationTeam />
           </div>
 
