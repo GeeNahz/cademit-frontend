@@ -3,26 +3,31 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-import type { FormField, StatusType, ProspectsRecord } from "@/app/types";
+import type { FormField, StatusType, ProspectsRecord, Gender } from "@/app/types";
 
 import Form from "@/app/components/Form";
+import ModalPopup from "@/app/components/ModalPopup";
+import MessageBox from "@/app/components/MessageBox";
+import { FETCH_STATUS } from "@/utils/status";
+
+const defaultState: ProspectsRecord = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    gender: "" as Gender,
+    course: "",
+    employment_status: "",
+    purpose: "",
+    experience_level: 0,
+    computer_access: false,
+    internet_access: false,
+    use_workspace: false,
+};
 
 export default function SignupPage() {
-    const [data, setData] = useState<ProspectsRecord>({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        gender: "Male",
-        course: "",
-        employment_status: "",
-        purpose: "",
-        experience_level: 0,
-        computer_access: false,
-        internet_access: false,
-        use_workspace: false,
-    });
-    const [submitting, setSubmitting] = useState(false);
+    const [data, setData] = useState<ProspectsRecord>(defaultState);
+    const [status, setStatus] = useState(FETCH_STATUS.IDLE);
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState<StatusType>("idle");
 
@@ -194,10 +199,7 @@ export default function SignupPage() {
 
             if (response.ok) {
                 assingMessage("Your record was successfully " + response.statusText, "success");
-
-                setTimeout(() => {
-                    router.push("/");
-                }, 5000);
+                setStatus(FETCH_STATUS.SUCCESS);
             } else {
                 let message = "";
                 if (response.status === 409) {
@@ -210,19 +212,27 @@ export default function SignupPage() {
             }
         } catch (error: any) {
             let errMessage: string = error.toString().split(":")[1];
-            
+
             assingMessage(errMessage, "error");
-        } finally {
-            setSubmitting(false);
+            setStatus(FETCH_STATUS.ERROR);
         }
     }
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault();
 
-        setSubmitting(true);
+        setStatus(FETCH_STATUS.LOADING);
 
         await createProspectsRecord();
+    }
+
+    function handleModalProceed() {
+        router.push("/");
+    }
+    function handleModalClose() {
+        setData(defaultState);
+        setMessageType("idle");
+        setStatus(FETCH_STATUS.IDLE);
     }
 
     return (
@@ -234,10 +244,21 @@ export default function SignupPage() {
                 message={message}
                 setData={setData}
                 fields={formFields}
-                submitting={submitting}
+                submitting={status === FETCH_STATUS.LOADING}
                 messageType={messageType}
                 handleSubmit={handleSubmit}
             />
+            {
+                status === FETCH_STATUS.SUCCESS
+                && (<ModalPopup>
+                    <MessageBox
+                        description="Your record has been submitted successfully."
+                        messageType="SUCCESS"
+                        onSuccess={handleModalProceed}
+                        onClose={handleModalClose}
+                    />
+                </ModalPopup>)
+            }
         </div>
     )
 }
