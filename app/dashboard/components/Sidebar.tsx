@@ -1,6 +1,14 @@
+import Link from "next/link";
 import { FaCaretRight } from "react-icons/fa"
 
 const Sidebar = () => {
+    const user = {
+        id: "kladf-asdfjl-as2kj",
+        username: "awesomeMe",
+        email: "awesomeMe@email.com",
+        image: "",
+    };
+    
   return (
     <aside className="border-r border-r-stone-300 mt-[calc(3.75rem*-1)] block transition-all ease-linear duration-200 w-[300px] will-change-transform">
         <div className="flex flex-col h-full max-h-screen pt-[3.75rem] top-0 w-[300px] transition-opacity duration-75 ease-linear delay-0">
@@ -15,9 +23,9 @@ const Sidebar = () => {
                         </div>
                     </li>
                     <li className="hover:bg-zinc-200 transition-colors mt-1 flex flex-wrap relative rounded-sm">
-                        <a className="flex-1 py-[0.375rem] px-3 leading-[1.25] flex items-center text-gray-500" href="#">
-                            <span className="flex-1">Profile</span>
-                        </a>
+                        <Link className="flex-1 py-[0.375rem] px-3 leading-[1.25] flex items-center text-gray-500" href={`/dashboard/${user.id}/prospects`}>
+                            <span className="flex-1">Prospects</span>
+                        </Link>
                     </li>
                 </ul>
             </nav>
