@@ -115,11 +115,11 @@ export default function Footer() {
     const contacts = [
         {
             id: 1,
-            value: "+234 123 456 7890",
+            value: "+234 803 756 8566",
         },
         {
             id: 2,
-            value: "info@cademit.com",
+            value: "info.cademit@gmail.com",
         },
     ];
 
