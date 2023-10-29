@@ -147,15 +147,15 @@ export default function Footer() {
                     </div>
 
                     <div className="social-icons flex gap-3 items-center">
-                        <SocialIcons linkUrl="#">
+                        <SocialIcons linkUrl="https://www.instagram.com/cademit_/">
                             {<FaInstagram />}
                         </SocialIcons>
 
-                        <SocialIcons linkUrl="#">
+                        <SocialIcons linkUrl="https://www.facebook.com/cademitinc?mibextid=ZbWKwL">
                             {<FaFacebookF />}
                         </SocialIcons>
 
-                        <SocialIcons linkUrl="#">
+                        <SocialIcons linkUrl="https://twitter.com/Cademit_">
                             {<FaTwitter />}
                         </SocialIcons>
                     </div>
