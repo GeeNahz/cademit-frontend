@@ -75,7 +75,7 @@ export type StudentRecord = {
   use_workspace: boolean;
 };
 
-export type Gender = "Male" | "Female" | "Other"
+export type Gender = "Male" | "Female";
 
 export type ProspectsRecord = {
   first_name: string;
