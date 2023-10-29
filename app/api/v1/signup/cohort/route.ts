@@ -1,6 +1,6 @@
 import { connectToDB } from "@/utils/database";
 import { status } from "@/utils/status";
-import { ProspectsRecord } from "@/app/types";
+import { ProspectRecord } from "@/app/types";
 import Prospect from "@/models/prospects";
 
 async function create(model: any, payload: any) {
@@ -23,6 +23,7 @@ export const POST = async (req: Request) => {
     computer_access,
     internet_access,
     use_workspace,
+    is_approved,
   } = await req.json();
 
   try {
@@ -33,7 +34,7 @@ export const POST = async (req: Request) => {
     if (emailExists) {
       return new Response("Email already in use", { status: status.HTTP_409_CONFLICT });
     } else {
-      const payload: ProspectsRecord = { first_name, last_name, email, gender, phone, course, employment_status, experience_level, purpose, computer_access, internet_access, use_workspace };
+      const payload: ProspectRecord = { first_name, last_name, email, gender, phone, course, employment_status, experience_level, purpose, computer_access, internet_access, use_workspace, is_approved };
 
       const prospect = await create(Prospect, payload);
 

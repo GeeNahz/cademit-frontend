@@ -1,8 +1,8 @@
 import { Schema, models, model } from "mongoose";
 
-import type { ProspectsRecord } from "@/app/types";
+import type { ProspectRecord } from "@/app/types";
 
-const ProspectSchema = new Schema<ProspectsRecord>({
+const ProspectSchema = new Schema<ProspectRecord>({
   first_name: {
     type: String,
     required: [true, "First name is required!"],

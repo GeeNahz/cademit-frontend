@@ -3,14 +3,14 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-import type { FormField, StatusType, ProspectsRecord, Gender } from "@/app/types";
+import type { FormField, StatusType, ProspectRecord, Gender } from "@/app/types";
 
 import Form from "@/app/components/Form";
 import ModalPopup from "@/app/components/ModalPopup";
 import MessageBox from "@/app/components/MessageBox";
 import { FETCH_STATUS } from "@/utils/status";
 
-const defaultState: ProspectsRecord = {
+const defaultState: ProspectRecord = {
     first_name: "",
     last_name: "",
     email: "",
@@ -23,10 +23,11 @@ const defaultState: ProspectsRecord = {
     computer_access: false,
     internet_access: false,
     use_workspace: false,
+    is_approved: false,
 };
 
 export default function SignupPage() {
-    const [data, setData] = useState<ProspectsRecord>(defaultState);
+    const [data, setData] = useState<ProspectRecord>(defaultState);
     const [status, setStatus] = useState(FETCH_STATUS.IDLE);
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState<StatusType>("idle");

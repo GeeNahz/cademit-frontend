@@ -77,7 +77,7 @@ export type StudentRecord = {
 
 export type Gender = "Male" | "Female";
 
-export type ProspectsRecord = {
+export type ProspectRecord = {
   id?: string | number;
   _id?: string | number;
   first_name: string;
