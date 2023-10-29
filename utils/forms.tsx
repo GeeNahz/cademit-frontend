@@ -10,7 +10,7 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
             return (
                 <label key={field.fieldName} htmlFor={field.fieldProps?.id} className="w-full">
                     <span className="font-satoshi font-semibold text-base text-gray-700">
-                        {field.label}
+                        {field.label} {field.fieldProps?.required ? <span className="text-red-400">*</span> : null}
                     </span>
 
                     <input
@@ -27,7 +27,9 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
         case INPUT_TYPES.TEXTAREA:
             return (
                 <label key={field.fieldName} htmlFor={field.fieldProps?.id} className="w-full">
-                    <span className="font-satoshi font-semibold text-base text-gray-700">{field.label}</span>
+                    <span className="font-satoshi font-semibold text-base text-gray-700">
+                        {field.label} {field.fieldProps?.required ? <span className="text-red-400">*</span> : null}
+                    </span>
 
                     <textarea
                         name={field.fieldName}
@@ -45,7 +47,9 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
         case INPUT_TYPES.RADIO:
             return (
                 <label key={field.fieldName}>
-                    <span className="font-satoshi font-semibold text-base text-gray-700">{field.label}</span>
+                    <span className="font-satoshi font-semibold text-base text-gray-700">
+                        {field.label} {field.fieldProps?.required ? <span className="text-red-400">*</span> : null}
+                    </span>
 
                     {
                         (field?.selectOptions as []).map((option: FormSelectOptions) => (
@@ -75,13 +79,15 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
                         className="rounded border border-stone-400"
                         required={field.fieldProps?.required}
                     />
-                    <span className="font-satoshi font-normal text-base text-gray-500">{field.label}</span>
+                    <span className="font-satoshi font-normal text-base text-gray-500">{field.label} {field.fieldProps?.required ? <span className="text-red-400">*</span> : null}</span>
                 </label>
             );
         case INPUT_TYPES.SELECT:
             return (
                 <label key={field.fieldName} htmlFor={field.fieldProps?.id} className="w-full">
-                    <span className="font-satoshi font-semibold text-base text-gray-700">{field.label}</span>
+                    <span className="font-satoshi font-semibold text-base text-gray-700">
+                        {field.label} {field.fieldProps?.required ? <span className="text-red-400">*</span> : null}
+                    </span>
 
                     <select name={field.fieldName} id={field.fieldProps?.id} onChange={(e) => setData({ ...data, [field.fieldName]: e.target.value })} value={field.value as string} required={field.fieldProps?.required} className="form_input">
                         <option value="">-- Select {field.label} --</option>
