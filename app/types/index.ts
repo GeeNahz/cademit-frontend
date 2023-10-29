@@ -78,6 +78,8 @@ export type StudentRecord = {
 export type Gender = "Male" | "Female";
 
 export type ProspectsRecord = {
+  id?: string | number;
+  _id?: string | number;
   first_name: string;
   last_name: string;
   email: string;
@@ -90,6 +92,7 @@ export type ProspectsRecord = {
   computer_access: boolean;
   internet_access: boolean;
   use_workspace: boolean;
+  is_approved?: boolean;
 };
 
 export type User = {
