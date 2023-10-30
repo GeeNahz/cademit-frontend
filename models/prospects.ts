@@ -50,6 +50,9 @@ const ProspectSchema = new Schema<ProspectRecord>({
     type: Boolean,
     required: [true, "Use of workspace is required!"],
   },
+  is_approved: {
+    type: Boolean,
+  },
 });
 
 const Prospect = models.Prospect || model("Prospect", ProspectSchema);
