@@ -8,17 +8,19 @@ import Form from "@/app/components/Form";
 import { FormField, Gender, User } from "@/app/types";
 import { FETCH_STATUS } from "@/utils/status";
 
+const defaultData: User = {
+    first_name: "",
+    last_name: "",
+    username: "",
+    password: "",
+    gender: "" as Gender,
+    email: "",
+    image: "",
+    is_admin: true,
+};
+
 export default function Signin() {
-    const [data, setData] = useState<User>({
-        first_name: "",
-        last_name: "",
-        username: "",
-        password: "",
-        gender: "" as Gender,
-        email: "",
-        image: "",
-        is_admin: true,
-    });
+    const [data, setData] = useState<User>(defaultData);
     const [status, setStatus] = useState(FETCH_STATUS.IDLE);
     
     const signInFormFields: FormField[] = [
