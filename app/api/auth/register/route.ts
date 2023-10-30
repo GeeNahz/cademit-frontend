@@ -27,9 +27,9 @@ export const POST = async (req: Request) => {
         last_name: credentials?.last_name || "",
         email: credentials?.email.toLowerCase(),
         username: credentials?.username.replace(" ", "").toLowerCase(),
-        gender: credentials.gender,
-        image: credentials.image || "",
-        is_admin: credentials.is_admin || false,
+        gender: credentials?.gender,
+        image: credentials?.image || "",
+        is_admin: credentials?.is_admin || false,
         hashed_password,
       });
     }
