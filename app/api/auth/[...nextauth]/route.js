@@ -11,6 +11,7 @@ const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/signin",
+    signOut: "/signin",
   },
   session: {
     strategy: "database",
