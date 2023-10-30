@@ -4,10 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/utils/adapters/mongodb";
 
-import User from "@/models/user"
-
-import { connectToDB } from "@/utils/database"
-import { useCheckHashPassword } from "@/app/hooks/keygen";
+import { signInUser } from "@/services/SignInService";
 
 const handler = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
@@ -22,26 +19,14 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
-        await connectToDB();
-
         if (credentials === null) return null;
 
         try {
-          // Check for user in DB
-          const user = await User.findOne({
-            username: credentials?.username,
-          });
+          const user = await signInUser(credentials);
 
-          if (user) {
-            const isPassword = useCheckHashPassword(credentials.password, user.hashed_password);
-            if (isPassword) {
-              return user;
-            } else {
-              throw new Error("Username or password is incorrect");
-            }
-          } else {
-            throw new Error("User not found");
-          }
+          if (user) return user;
+
+          return null;
         } catch (error) {
           throw new Error(error);
         }
@@ -55,7 +40,17 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user?._id) token.id = user._id;
-      if (user?.is_admin) token.is_admin = user.is_admin;
+      if (user?.is_admin) {
+        token.is_admin = user.is_admin;
+      } else {
+        token.is_admin = false;
+      }
+      token.first_name = user.first_name;
+      token.last_name = user.last_name;
+      token.image = user.image;
+      token.email = user.email;
+      token.gender = user.gender;
+
       return token;
     },
     async session({ session, token }) {
@@ -63,6 +58,7 @@ const handler = NextAuth({
       session.user.is_admin = token.is_admin;
       session.user.email = token.email;
       session.user.name = token.first_name + " " + token.last_name;
+      session.user.gender = token.gender;
 
       if (token.image) {
         session.user.image = token.image;
