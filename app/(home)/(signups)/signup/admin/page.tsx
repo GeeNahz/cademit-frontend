@@ -1,12 +1,16 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 import Form from "@/app/components/Form";
 
-import { FormField, Gender, User } from "@/app/types";
+import { ErrorType, FormField, Gender, StatusType, User } from "@/app/types";
 import { FETCH_STATUS } from "@/utils/status";
+import { registerUser } from "@/services/RegisterService";
+import ModalPopup from "@/app/components/ModalPopup";
+import MessageBox from "@/app/components/MessageBox";
 
 const defaultData: User = {
     first_name: "",
@@ -22,6 +26,8 @@ const defaultData: User = {
 export default function Signin() {
     const [data, setData] = useState<User>(defaultData);
     const [status, setStatus] = useState(FETCH_STATUS.IDLE);
+    const [error, setError] = useState("");
+    const [errorType, setErrorType] = useState<StatusType>("idle");
     
     const signInFormFields: FormField[] = [
         {
@@ -101,10 +107,33 @@ export default function Signin() {
         },
     ];
 
-    function handleSignin(e: FormEvent) {
+    async function handleSignin(e: FormEvent) {
         e.preventDefault();
+        setStatus(FETCH_STATUS.LOADING);
 
-        console.log(data);
+        try {
+            await registerUser(data);
+            setStatus(FETCH_STATUS.SUCCESS);
+        } catch (error: any) {
+            setStatus(FETCH_STATUS.ERROR);
+            setErrorType("error");
+            setError((error as ErrorType).errorMessage);
+        } finally {
+            setTimeout(() => {
+                setError("");
+                setErrorType("idle");
+            }, 5000);
+        }
+    }
+
+    function handleCloseModal() {
+        setStatus(FETCH_STATUS.IDLE);
+        setData(defaultData);
+    }
+
+    const router = useRouter();
+    function handleSuccessModal() {
+        router.push("/signin");
     }
     
     return (
@@ -118,7 +147,21 @@ export default function Signin() {
                 type="Sign up"
                 header="Admin Sign Up"
                 desc="Sign up as an admin"
+                message={error}
+                messageType={errorType}
             />
+            {
+                status === FETCH_STATUS.SUCCESS && (
+                    <ModalPopup>
+                        <MessageBox
+                            messageType="SUCCESS"
+                            description="Registration was successful. Sign in to continue"
+                            onClose={handleCloseModal}
+                            onSuccess={handleSuccessModal}
+                        />
+                    </ModalPopup>
+                )
+            }
         </div>
     );
 }
