@@ -37,7 +37,7 @@ const handler = NextAuth({
             if (isPassword) {
               return user;
             } else {
-              throw new Error("Email or password is incorrect");
+              throw new Error("Username or password is incorrect");
             }
           } else {
             throw new Error("User not found");
