@@ -1,4 +1,4 @@
-import { User } from "@/app/types";
+import { ErrorType, User } from "@/app/types";
 
 export async function registerUser (data: User) {
   try {
@@ -12,12 +12,14 @@ export async function registerUser (data: User) {
 
     if (response.ok) {
       return await response.json();
-    } else {      
-      const error = {
+    } else {
+      const error: ErrorType = {
         status: response.status,
         statusText: response.statusText,
-        headers: response.headers
+        headers: response.headers,
+        errorMessage: await response.text(),
       };
+      
       throw error;
     }
   } catch (error) {    
