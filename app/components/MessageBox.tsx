@@ -49,7 +49,7 @@ export default function MessageBox({
             <span className="absolute top-2 right-2 cursor-pointer rounded-full p-1 bg-gray-100 hover:bg-gray-200 transition-colors duration-300" title="close" onClick={onClose}>
                 <XMarkIcon className="text-gray-500 h-7 w-7" />
             </span>
-            
+
             <div className={iconTheme}>
                 {renderIcon(messageType)}
             </div>
@@ -62,9 +62,12 @@ export default function MessageBox({
                 }
             </>
 
-            <div className="action mt-10">
-                <button onClick={onSuccess} className={btnTheme}>Proceed</button>
-            </div>
+            {
+                onSuccess &&
+                <div className="action mt-10 h-fit w-fit">
+                    <button onClick={onSuccess} className={btnTheme}>Proceed</button>
+                </div>
+            }
         </div>
     );
 }
