@@ -13,7 +13,7 @@ const handler = NextAuth({
     signIn: "/signin",
   },
   session: {
-    strategy: "jwt",
+    strategy: "database",
     maxAge: 12 * 60 * 60, // 12 hours
     updateAge: 6 * 60 * 60, // 6 hours
   },
