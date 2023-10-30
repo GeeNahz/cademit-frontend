@@ -59,14 +59,17 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      // const sessionUser = await User.findOne({
-      //   email: session?.user?.email,
-      // });
+      session.user.id = token.id;
+      session.user.is_admin = token.is_admin;
+      session.user.email = token.email;
+      session.user.name = token.first_name + " " + token.last_name;
 
-      // session.user.id = sessionUser._id.toString();
+      if (token.image) {
+        session.user.image = token.image;
+      } else {
+        session.user.image = ""; // set default image here instead
+      }
 
-      if (token.id) session.user.id = token.id;
-      if (token.is_admin) session.user.is_admin = token.is_admin;
       return session;
     },
     // async signIn({ profile }) {
