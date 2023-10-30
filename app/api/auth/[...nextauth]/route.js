@@ -62,8 +62,8 @@ const handler = NextAuth({
       session.user.name = token.first_name + " " + token.last_name;
       session.user.gender = token.gender;
 
-      if (token.image) {
-        session.user.image = token.image;
+      if (token.picture) {
+        session.user.image = token.picture;
       } else {
         session.user.image = ""; // set default image here instead
       }
