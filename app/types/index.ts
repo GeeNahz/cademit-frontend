@@ -129,3 +129,10 @@ export type FormField = {
   selectOptions?: FormSelectOptions[];
   // selectOptions?: {[key: string]: any}[];
 };
+
+export type ErrorType = {
+  status: number;
+  statusText: string;
+  errorMessage: string;
+  headers: {[key: string]: any};
+};
