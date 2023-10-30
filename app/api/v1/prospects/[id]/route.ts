@@ -13,9 +13,6 @@ export const GET = async (req: Request, { params }: { params: Types.ObjectId}) =
     const prospect = await Prospect.findOne({
       _id: params.id,
     });
-
-    console.log("SERVER LOG: ", prospect);
-
     if (prospect) {
       return new Response(JSON.stringify(prospect), { status: status.HTTP_200_OK });
     } else {
