@@ -18,34 +18,40 @@ type ProspectCardProps = {
 };
 
 function ProspectCard({ id, first_name, last_name, email, phone, approved, }: ProspectCardProps) {
-    const badgeColor = clsx(
-        "absolute top-3 right-3 badge badge-xs",
+
+    const statusColor = clsx(
+        "relative max-w-md w-80 shadow rounded-md p-5 bg-white border-t-8",
         {
-            "badge-primary": approved,
-            "badge-error": !approved,
+            "border-primary": approved,
+            "border-error": !approved,
         }
     );
-    
-    return (
-        <Link href={`/dashboard/kladf-asdfjl-as2kj/prospects/${id}`} className="relative max-w-md w-80 shadow rounded-md p-5 bg-white">
-            <div title="approved" className={badgeColor}></div>
-            
-            <div className="name-image flex items-center justify-start gap-3">
-                <p className="first-letter text-white bg-sky-500 font-semibold text-2xl h-10 w-10 rounded-full flex items-center justify-center">
-                    {first_name[0].toUpperCase()}
-                </p>
 
-                <p className="font-semibold text-lg">{first_name + " " + last_name}</p>
+    return (
+        <Link href={`/dashboard/kladf-asdfjl-as2kj/prospects/${id}`} className={statusColor}>
+            <div className="name-image">
+                <div className="flex items-start justify-between gap-3">
+                    <p className="font-light text-xs text-stone-500">Full name</p>
+
+                    <p className="first-letter text-white bg-sky-500 font-semibold text-sm h-6 w-6 rounded-full flex items-center justify-center">
+                        {first_name[0].toUpperCase()}
+                    </p>
+                </div>
+                <p className="font-bold text-base">{first_name + " " + last_name}</p>
             </div>
 
-            <div className="summary mt-4 ml-2 space-y-2">
-                <div className="flex gap-3 items-center justify-start">
-                    <p><FaEnvelope /></p>
-                    <p className="text-sm font-inter">{email}</p>
-                </div>
-                <div className="flex gap-3 items-center justify-start">
-                    <p><FaPhone /></p>
-                    <p className="text-sm font-inter">{phone}</p>
+            <div className="mt-4">
+                <p className="font-light text-xs text-stone-500 mb-3">Contact</p>
+
+                <div className="summary space-y-2">
+                    <div className="flex gap-3 items-center justify-start">
+                        <p><FaEnvelope /></p>
+                        <p className="text-sm font-inter">{email}</p>
+                    </div>
+                    <div className="flex gap-3 items-center justify-start">
+                        <p><FaPhone /></p>
+                        <p className="text-sm font-inter">{phone}</p>
+                    </div>
                 </div>
             </div>
         </Link>
