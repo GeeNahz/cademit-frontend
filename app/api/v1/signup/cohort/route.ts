@@ -3,11 +3,7 @@ import { status } from "@/utils/status";
 import { ProspectRecord } from "@/app/types";
 import Prospect from "@/models/prospects";
 
-async function create(model: any, payload: any) {
-  const newRecord = new model({ ...payload });
-  const createdRecord = await newRecord.save();
-  return createdRecord;
-}
+import { createObject } from "@/utils/dbFunctions";
 
 export const POST = async (req: Request) => {
   const {
@@ -36,7 +32,7 @@ export const POST = async (req: Request) => {
     } else {
       const payload: ProspectRecord = { first_name, last_name, email, gender, phone, course, employment_status, experience_level, purpose, computer_access, internet_access, use_workspace, is_approved };
 
-      const prospect = await create(Prospect, payload);
+      const prospect = await createObject(Prospect, payload);
 
       return new Response(JSON.stringify(prospect), { status: status.HTTP_201_CREATED });
     }
