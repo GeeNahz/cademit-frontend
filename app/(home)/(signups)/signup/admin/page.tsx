@@ -47,30 +47,6 @@ export default function Signin() {
             },
         },
         {
-            type: "text",
-            fieldName: "username",
-            label: "Username",
-            value: data.username,
-            fieldProps: {
-                classes: "username",
-                id: "username",
-                placeholder: "johndoe",
-                required: true,
-            },
-        },
-        {
-            type: "password",
-            fieldName: "password",
-            label: "Password",
-            value: data.password as string,
-            fieldProps: {
-                classes: "pword",
-                id: "password",
-                placeholder: "●●●●●●●●●●",
-                required: true,
-            },
-        },
-        {
             type: "email",
             fieldName: "email",
             label: "Email",
@@ -97,6 +73,30 @@ export default function Signin() {
                 { id: 2, title: "Female", value: "Female", },
                 { id: 3, title: "Other", value: "Other", },
             ],
+        },
+        {
+            type: "text",
+            fieldName: "username",
+            label: "Username",
+            value: data.username,
+            fieldProps: {
+                classes: "username",
+                id: "username",
+                placeholder: "johndoe",
+                required: true,
+            },
+        },
+        {
+            type: "password",
+            fieldName: "password",
+            label: "Password",
+            value: data.password as string,
+            fieldProps: {
+                classes: "pword",
+                id: "password",
+                placeholder: "●●●●●●●●●●",
+                required: true,
+            },
         },
     ];
 
