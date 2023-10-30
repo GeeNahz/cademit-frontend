@@ -71,7 +71,6 @@ export default function Signin() {
             selectOptions: [
                 { id: 1, title: "Male", value: "Male", },
                 { id: 2, title: "Female", value: "Female", },
-                { id: 3, title: "Other", value: "Other", },
             ],
         },
         {
