@@ -49,7 +49,7 @@ const handler = NextAuth({
       }
       token.first_name = user.first_name;
       token.last_name = user.last_name;
-      token.image = user.image;
+      token.picture = user.image;
       token.email = user.email;
       token.gender = user.gender;
 
