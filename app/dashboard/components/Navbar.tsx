@@ -1,11 +1,21 @@
-import Image from "next/image";
+"use client";
 
-const Navbar = () => {
-  const user = {
-    username: "",
-    email: "",
-    image: "",
-  };
+import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
+import clsx from "clsx";
+
+
+export default function Navbar() {
+
+  const { data: session } = useSession();
+
+  const genderStyle = clsx(
+    "profile-image rounded-full overflow-hidden h-9 w-9 p-[2px]",
+    {
+      "bg-blue-500": session?.user.gender === "Male",
+      "bg-pink-600": session?.user.gender === "Female",
+    }
+  );
 
   return (
     <nav className="px-5 h-[3.75rem] w-full sticky top-0 z-50 bg-white flex items-center justify-between text-lg border-b border-gray-200">
@@ -19,12 +29,19 @@ const Navbar = () => {
         />
       </div>
 
-      <div className="user-profile flex gap-5 items-center">
-        <p className="profile-email font-medium text-base text-stone-500">myemail@example.com</p>
-        <div className="profile-image bg-base-content rounded-full h-9 w-9"></div>
+      <div className="user-profile flex gap-3 items-center text-sm">
+        <p className="profile-email font-normal text-stone-500">{session?.user.email}</p>
+        <button onClick={() => signOut()} className="text-red-700 hover:text-red-500 hover:underline hover:underline-offset-2 transition-all duration-200 font-normal">Sign out</button>
+        <div className={genderStyle}>
+          <Image
+            src={session?.user.image as string}
+            alt={session?.user.name as string}
+            height={60}
+            width={60}
+            className="w-full h-full object-contain rounded-full"
+          />
+        </div>
       </div>
     </nav>
   )
 }
-
-export default Navbar;
