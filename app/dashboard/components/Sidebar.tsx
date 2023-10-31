@@ -1,6 +1,8 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import NavLink from "@/app/components/NavLink";
+
 import Link from "next/link";
 import { FaCaretRight } from "react-icons/fa"
 
@@ -14,16 +16,16 @@ const Sidebar = () => {
                     <ul className="m-0 pl-0">
                         <li className="hover:bg-zinc-200 transition-colors rounded-sm">
                             <div className="flex flex-wrap relative rounded-md">
-                                <Link className="flex-1 py-[0.375rem] px-3 leading-[1.25] flex items-center text-gray-500" href={`/dashboard/${session?.user.id as string}/overview`}>
+                                <NavLink className="flex-1 py-[0.375rem] px-3 leading-[1.25] flex items-center text-gray-500" href={`/dashboard/${session?.user.id as string}/overview`}>
                                     <span className="flex-1">Overview</span>
                                     <FaCaretRight className="h-5 w-5" />
-                                </Link>
+                                </NavLink>
                             </div>
                         </li>
                         <li className="hover:bg-zinc-200 transition-colors mt-1 flex flex-wrap relative rounded-sm">
-                            <Link className="flex-1 py-[0.375rem] px-3 leading-[1.25] flex items-center text-gray-500" href={`/dashboard/${session?.user.id as string}/prospects`}>
+                            <NavLink className="flex-1 py-[0.375rem] px-3 leading-[1.25] flex items-center text-gray-500" href={`/dashboard/${session?.user.id as string}/prospects`}>
                                 <span className="flex-1">Prospects</span>
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>
