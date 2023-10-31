@@ -7,6 +7,7 @@ import { FaEnvelope, FaPhone } from "react-icons/fa6"
 
 import { ProspectRecord } from "@/app/types";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 
 type ProspectCardProps = {
     id: string;
@@ -18,7 +19,8 @@ type ProspectCardProps = {
 };
 
 function ProspectCard({ id, first_name, last_name, email, phone, approved, }: ProspectCardProps) {
-
+    const { data: session } = useSession();
+    
     const statusColor = clsx(
         "relative max-w-md w-80 shadow rounded-md p-5 bg-white border-t-8",
         {
@@ -28,7 +30,7 @@ function ProspectCard({ id, first_name, last_name, email, phone, approved, }: Pr
     );
 
     return (
-        <Link href={`/dashboard/kladf-asdfjl-as2kj/prospects/${id}`} className={statusColor}>
+        <Link href={`/dashboard/${session?.user.id}/prospects/${id}`} className={statusColor}>
             <div className="name-image">
                 <div className="flex items-start justify-between gap-3">
                     <p className="font-light text-xs text-stone-500">Full name</p>
