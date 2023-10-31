@@ -3,6 +3,7 @@
 import { ProspectRecord } from "@/app/types";
 import { FETCH_STATUS } from "@/utils/status";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -26,6 +27,8 @@ async function fetchProspect(id: string | number) {
 }
 
 export default function ProspectDetails({ params }: { params: { prospectId: string } }) {
+    const { data: session } = useSession();
+    
     const [status, setStatus] = useState(FETCH_STATUS.IDLE);
     const [details, setDetails] = useState<ProspectRecord>();
     async function getProspectDetails() {
@@ -165,7 +168,7 @@ export default function ProspectDetails({ params }: { params: { prospectId: stri
                     </div>
 
                     <div className="actions pt-10 flex items-center justify-between px-10">
-                        <Link className="font-semibold blue_gradient" href={"/dashboard/kladf-asdfjl-as2kj/prospects"}>Back</Link>
+                        <Link className="font-semibold blue_gradient" href={`/dashboard/${session?.user.id}/prospects`}>Back</Link>
 
                         <div className="approvals flex gap-5">
                             <button
