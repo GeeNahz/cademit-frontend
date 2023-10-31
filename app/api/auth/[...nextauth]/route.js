@@ -94,7 +94,7 @@ const handler = NextAuth({
       if (token.picture) {
         session.user.image = token.picture;
       } else {
-        session.user.image = "/images/default-profile.avif"; // set default image here instead
+        session.user.image = "/images/default-profile.png"; // set default image here instead
       }
 
       return session;
