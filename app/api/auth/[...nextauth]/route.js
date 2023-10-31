@@ -4,7 +4,33 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/utils/adapters/mongodb";
 
-import { signInUser } from "@/services/SignInService";
+import { status } from "@/utils/status";
+import { useCheckHashPassword } from "@/app/hooks/keygen";
+import { connectToDB } from "@/utils/database";
+import User from "@/models/user";
+
+async function attemptSignin(credentials) {
+  try {
+    await connectToDB();
+    // Check for user in DB
+    const user = await User.findOne({
+      username: credentials.username,
+    });
+
+    if (user) {
+      const isPassword = useCheckHashPassword(credentials.password, user.hashed_password);
+      if (isPassword) {
+        return user;
+      } else {
+        throw new Response("Username or password is incorrect", { status: status.HTTP_400_BAD_REQUEST });
+      }
+    } else {
+      throw new Response("User not found", { status: status.HTTP_404_NOT_FOUND });
+    }
+  } catch (error) {
+    throw new Response("We encountered a problem while signing you in. Please try again later", { status: status.HTTP_500_INTERNAL_SERVER_ERROR });
+  }
+}
 
 const handler = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
@@ -22,14 +48,16 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
-        if (credentials === null) return null;
+        const { username, password } = credentials;
+
+        if (username === "" || password === "") return null;
 
         try {
-          const user = await signInUser(credentials);
+          const user = await attemptSignin({ username, password })
 
-          if (user) return user;
+          if (!user) return null;
 
-          return null;
+          return user;
         } catch (error) {
           throw new Error(error);
         }
@@ -43,25 +71,28 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user?._id) token.id = user._id;
+      if (user?.first_name) token.name = user.first_name + " " + user.last_name;
+      if (user?.gender) token.gender = user.gender;
+      if (user?.image) token.picture = user.image;
+      if (user?.email) token.email = user.email;
       if (user?.is_admin) {
         token.is_admin = user.is_admin;
       } else {
         token.is_admin = false;
       }
-      token.first_name = user.first_name;
-      token.last_name = user.last_name;
-      token.picture = user.image;
-      token.email = user.email;
-      token.gender = user.gender;
 
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.user.is_admin = token.is_admin;
+      console.log("SESSION: ", session);
+      console.log("TOKEN: ", token);
+
       session.user.email = token.email;
-      session.user.name = token.first_name + " " + token.last_name;
-      session.user.gender = token.gender;
+      if (token?.first_name) session.user.name = token.name;
+
+      if (token?.id) session.user.id = token.id;
+      if (token?.gender) session.gender = token.gender;
+      if (token?.is_admin) session.is_admin = token.is_admin;
 
       if (token.picture) {
         session.user.image = token.picture;
