@@ -84,20 +84,17 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      console.log("SESSION: ", session);
-      console.log("TOKEN: ", token);
-
       session.user.email = token.email;
-      if (token?.first_name) session.user.name = token.name;
+      if (token?.name) session.user.name = token.name;
 
       if (token?.id) session.user.id = token.id;
-      if (token?.gender) session.gender = token.gender;
-      if (token?.is_admin) session.is_admin = token.is_admin;
+      if (token?.gender) session.user.gender = token.gender;
+      if (token?.is_admin) session.user.is_admin = token.is_admin;
 
       if (token.picture) {
         session.user.image = token.picture;
       } else {
-        session.user.image = ""; // set default image here instead
+        session.user.image = "/images/default-profile.avif"; // set default image here instead
       }
 
       return session;
