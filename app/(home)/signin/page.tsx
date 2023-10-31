@@ -5,9 +5,11 @@ import { signIn } from "next-auth/react";
 import Form from "@/app/components/Form";
 
 import { FormField, FETCH_STATUS } from "@/app/types";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Signin() {
+    const [error, setError] = useState("");
+    const [errorType, setErrorType] = useState("");
     const [data, setData] = useState({
         username: "",
         password: "",
@@ -42,14 +44,34 @@ export default function Signin() {
     ];
 
     const pathname = usePathname();
-    function handleSignin(e: FormEvent) {
+    const router = useRouter();
+    async function handleSignin(e: FormEvent) {
         e.preventDefault();
+        setStatus(FETCH_STATUS.LOADING);
+        try {
+            let res = await signIn("credentials", {
+                password: data.password,
+                username: data.username,
+                redirect: false,
+                callbackUrl: pathname === "/signin" ? "/dashboard" : undefined,
+            });
+            if (!res?.ok) throw res;
 
-        signIn("credentials", {
-            password: data.password,
-            username: data.username,
-            callbackUrl: pathname === "/signin" ? "/dashboard" : undefined,
-        });
+            router.push(res.url as string);
+        } catch (error) {
+            setError("Username or password is incorrect");
+            setErrorType("error");
+            setStatus(FETCH_STATUS.ERROR);
+        } finally {
+            setTimeout(() => {
+                setStatus(FETCH_STATUS.IDLE);
+            }, 2000);
+
+            setTimeout(() => {
+                setError("");
+            setErrorType("");
+            }, 5000);
+        }
     }
 
     return (
@@ -63,6 +85,8 @@ export default function Signin() {
                 type="Sign in"
                 header="Sign in"
                 desc="Sign in to your account"
+                message={error}
+                messageType={errorType}
             />
         </div>
     );
