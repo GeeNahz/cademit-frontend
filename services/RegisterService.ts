@@ -1,6 +1,6 @@
 import { ErrorType, User } from "@/app/types";
 
-export async function registerUser (data: User) {
+export async function registerUser(data: User) {
   try {
     const response = await fetch("/api/auth/register/user", {
       method: "POST",
@@ -19,10 +19,10 @@ export async function registerUser (data: User) {
         headers: response.headers,
         errorMessage: await response.text(),
       };
-      
+
       throw error;
     }
-  } catch (error) {    
+  } catch (error) {
     throw error;
   }
 }
