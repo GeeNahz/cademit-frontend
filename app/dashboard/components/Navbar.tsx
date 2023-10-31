@@ -33,13 +33,15 @@ export default function Navbar() {
         <p className="profile-email font-normal text-stone-500">{session?.user.email}</p>
         <button onClick={() => signOut()} className="text-red-700 hover:text-red-500 hover:underline hover:underline-offset-2 transition-all duration-200 font-normal">Sign out</button>
         <div className={genderStyle}>
-          <Image
-            src={session?.user.image as string}
-            alt={session?.user.name as string}
-            height={60}
-            width={60}
-            className="w-full h-full object-contain rounded-full"
-          />
+          <div className="bg-white w-full h-full rounded-full">
+            <Image
+              src={session?.user.image as string}
+              alt={session?.user.name as string}
+              height={36}
+              width={36}
+              className="w-full h-full object-cover rounded-full"
+            />
+          </div>
         </div>
       </div>
     </nav>
