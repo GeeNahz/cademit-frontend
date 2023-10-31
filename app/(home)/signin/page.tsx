@@ -2,10 +2,10 @@
 
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
-
 import Form from "@/app/components/Form";
 
 import { FormField, FETCH_STATUS } from "@/app/types";
+import { usePathname } from "next/navigation";
 
 export default function Signin() {
     const [data, setData] = useState({
@@ -41,13 +41,15 @@ export default function Signin() {
         },
     ];
 
+    const pathname = usePathname();
     function handleSignin(e: FormEvent) {
         e.preventDefault();
 
-        // signIn("credentials", {
-        //     password: data.password,
-        //     username: data.username,
-        // });
+        signIn("credentials", {
+            password: data.password,
+            username: data.username,
+            callbackUrl: pathname === "/signin" ? "/dashboard" : undefined,
+        });
     }
 
     return (
