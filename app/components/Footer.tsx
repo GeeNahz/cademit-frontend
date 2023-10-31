@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
+import { FaTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { PhoneIcon, EnvelopeIcon, ArrowLongRightIcon } from '@heroicons/react/24/solid'
 
 import { IconObj } from "@/app/types";
@@ -157,6 +157,10 @@ export default function Footer() {
 
                         <SocialIcons linkUrl="https://twitter.com/Cademit_">
                             {<FaTwitter />}
+                        </SocialIcons>
+
+                        <SocialIcons linkUrl="https://www.linkedin.com/company/cademit">
+                            {<FaLinkedinIn />}
                         </SocialIcons>
                     </div>
                 </div>
