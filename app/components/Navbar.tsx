@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/20/solid"
 
 import Backdrop from "@/app/components/Backdrop";
 
 export default function Navbar() {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
 
     function changeIsOpenState(e: React.ChangeEvent<HTMLInputElement>) {
@@ -69,8 +71,16 @@ export default function Navbar() {
                     </div>
 
                     <div className="ctas hidden lg:flex gap-5">
-                        <Link href="/signup" className="font-medium py-2 px-4 btn-primary bg-sky-500 hover:bg-sky-600 active:bg-sky-600 rounded transition-all">Sign up</Link>
-                        <Link href="/signin" className="font-medium py-2 px-4 btn-outline text-stone-700 border border-stone-300 hover:bg-stone-200 rounded transition-all">Sign in</Link>
+                        {
+                            pathname.includes(("signup" || "register"))
+                                ? null
+                                : (<Link href="/signup" className="font-medium py-2 px-4 btn-primary bg-sky-500 hover:bg-sky-600 active:bg-sky-600 rounded transition-all">Sign up</Link>)
+                        }
+                        {pathname.includes("signin")
+                            ? null
+                            : (<Link href="/signin" className="font-medium py-2 px-4 btn-outline text-stone-700 border border-stone-300 hover:bg-stone-200 rounded transition-all">Sign in</Link>)
+                        }
+
                     </div>
 
                     <div className="block lg:hidden">
@@ -111,12 +121,20 @@ export default function Navbar() {
                                     <li>
                                         <Link href="/blogs" onClick={closeMenubar} className="hover:text-primary transition-colors duration-200">Blogs and News</Link>
                                     </li>
-                                    <li>
-                                        <Link href="/signup" onClick={closeMenubar} className="btn btn-block btn-primary">Sign up</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/signin" onClick={closeMenubar} className="btn btn-block btn-primary btn-outline">Sign in</Link>
-                                    </li>
+                                    {
+                                        pathname.includes(("signup" || "register"))
+                                            ? null
+                                            : (<li>
+                                                <Link href="/signup" onClick={closeMenubar} className="btn btn-block btn-primary">Sign up</Link>
+                                            </li>)
+                                    }
+                                    {
+                                        pathname.includes("signin")
+                                            ? null
+                                            : (<li>
+                                                <Link href="/signin" onClick={closeMenubar} className="btn btn-block btn-primary btn-outline">Sign in</Link>
+                                            </li>)
+                                    }
                                 </ul>
                             </div>
                         </div>
