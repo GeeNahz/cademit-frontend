@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import clsx from "clsx";
 
@@ -30,7 +31,7 @@ async function fetchProspect(id: string | number) {
 
 export default function ProspectDetails({ params }: { params: { prospectId: string } }) {
     const { data: session } = useSession();
-    
+
     const [status, setStatus] = useState(FETCH_STATUS.IDLE);
     const [details, setDetails] = useState<ProspectRecord>();
     async function getProspectDetails() {
@@ -88,6 +89,7 @@ export default function ProspectDetails({ params }: { params: { prospectId: stri
         },
     );
 
+    const router = useRouter();
     return (
         <div className="w-full max-w-3xl">
             {
@@ -170,22 +172,22 @@ export default function ProspectDetails({ params }: { params: { prospectId: stri
                     </div>
 
                     <div className="actions pt-10 flex items-center justify-between px-10">
-                        <Link className="font-semibold blue_gradient" href={`/dashboard/${session?.user.id}/prospects`}>Back</Link>
+                        <button className="font-semibold blue_gradient" onClick={() => router.back()}>Back</button>
 
                         <div className="approvals flex gap-5">
                             <button
                                 disabled={!details.is_approved}
                                 className="text-red-500 hover:text-red-700 transition-colors duration-200 underline-offset-2 underline disabled:opacity-50"
                                 onClick={() => handleApproval(false)}>
-                                    {details.is_approved && (status === FETCH_STATUS.LOADING) ? <i>Revoking...</i> : "Revoke"}
-                                </button>
+                                {details.is_approved && (status === FETCH_STATUS.LOADING) ? <i>Revoking...</i> : "Revoke"}
+                            </button>
 
                             <button
                                 disabled={details.is_approved}
                                 className="btn bg-sky-500 border-0 text-white disabled:opacity-50 disabled:text-black"
                                 onClick={() => handleApproval(true)}>
-                                    {!details.is_approved && (status === FETCH_STATUS.LOADING) ? <i>Approving...</i> : "Approve"}
-                                </button>
+                                {!details.is_approved && (status === FETCH_STATUS.LOADING) ? <i>Approving...</i> : "Approve"}
+                            </button>
 
                         </div>
 
