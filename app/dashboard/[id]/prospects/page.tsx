@@ -3,11 +3,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { FaEnvelope, FaPhone } from "react-icons/fa6"
+import { FaEnvelope, FaPhone, FaFilter, FaFilterCircleXmark } from "react-icons/fa6"
 
 import { ProspectRecord } from "@/app/types";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
+import Header from "../../components/Header";
+import ModalPopup from "@/app/components/ModalPopup";
+import MessageBox from "@/app/components/MessageBox";
+import { FETCH_STATUS } from "@/utils/status";
 
 type ProspectData = {
     _id: string;
@@ -23,7 +27,7 @@ type ProspectCardProps = {
 
 function ProspectCard({ data }: ProspectCardProps) {
     const { data: session } = useSession();
-    
+
     const statusColor = clsx(
         "relative max-w-md w-80 shadow rounded-md p-5 bg-white border-t-8",
         {
@@ -85,12 +89,19 @@ async function getProspects() {
 
 export default function Prospects() {
     const [prospects, setProspects] = useState<ProspectRecord[]>([]);
+    const [status, setStatus] = useState(FETCH_STATUS.IDLE);
+
+    const [errorMessage, setErrorMessage] = useState("unable to fetch data. Please reload to try again.");
 
     async function fetchProspects() {
+        setStatus(FETCH_STATUS.LOADING);
         try {
             const data = await getProspects();
             setProspects(data);
-        } catch (error) {
+            setStatus(FETCH_STATUS.SUCCESS);
+        } catch (error: any) {
+            setStatus(FETCH_STATUS.ERROR);
+            setErrorMessage(error.message);
             console.log(error);
         }
     }
@@ -99,14 +110,62 @@ export default function Prospects() {
         fetchProspects();
     }, []);
 
+    if (status === FETCH_STATUS.LOADING) return (
+        <>
+            <Header pageTitle="Propects" />
+            <div className="h-full w-full flex items-center justify-center">
+                <p>Fetching data...</p>
+            </div>
+        </>
+    )
+    if (status === FETCH_STATUS.ERROR) return (
+        <>
+            <Header pageTitle="Propects" />
+            <MessageBox
+                description={errorMessage}
+                messageType="ERROR"
+                onSuccess={async () => await fetchProspects()}
+            />
+        </>
+    )
+
     return (
-        <div className="flex flex-wrap gap-5">
-            {prospects.map((prospect: ProspectRecord) => (
-                <ProspectCard
-                    key={prospect._id}
-                    data={{ _id: (prospect._id as string), email: prospect.email, first_name: prospect.first_name, last_name: prospect.last_name, phone: (prospect.phone as string), approved: prospect.is_approved }}
-                />
-            ))}
-        </div>
+        <>
+            <Header pageTitle="Propects">
+                <nav>
+                    <ul className="flex gap-3 items-center justify-center w-fit h-fit">
+                        <li><input className="search_input" type="search" name="prospect-search" id="prospect-search" placeholder="Search name or keywords" /></li>
+
+                        <li>
+                            <div className="dropdown dropdown-end">
+                                <div
+                                    tabIndex={0}
+                                    className="border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 p-2.5 shadow focus:shadow-none"
+                                >
+                                    <FaFilter className="text-gray-500" />
+                                </div>
+                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-stone-100 rounded-sm w-52">
+                                    <li><span>All</span></li>
+                                    <li><span>Approved</span></li>
+                                    <li><span>Not approved</span></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li className="cursor-pointer "><span title="filter"></span></li>
+                    </ul>
+                </nav>
+            </Header>
+            <div className="flex flex-wrap gap-5">
+                {
+                    prospects.map((prospect: ProspectRecord) => (
+                        <ProspectCard
+                            key={prospect._id}
+                            data={{ _id: (prospect._id as string), email: prospect.email, first_name: prospect.first_name, last_name: prospect.last_name, phone: (prospect.phone as string), approved: prospect.is_approved }}
+                        />
+                    ))
+                }
+            </div>
+        </>
     )
 }
