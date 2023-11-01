@@ -27,7 +27,7 @@ export default function Navbar() {
     return (
         // <header className="text-neutral h-fit z-20 shadow-sm lg:shadow w-full sticky top-0">
         <nav className="h-[3.75rem] w-full text-sm sticky top-0 z-50 border border-b border-b-stone-100">
-            <div className="bg-white bg-opacity-60 glass relative h-full flex items-center">
+            <div className="bg-white glass relative h-full flex items-center">
                 <div className="container flex justify-between items-center mx-auto">
                     <div className="flex gap-5 items-center">
                         <div className="logo transform translate-y-1">
