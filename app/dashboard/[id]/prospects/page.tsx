@@ -159,18 +159,18 @@ export default function Prospects() {
         <>
             <Header pageTitle="Propects">
                 <nav>
-                    <ul className="flex gap-3 items-center justify-center w-fit h-fit">
+                    <ul className="flex gap-3 justify-center w-fit h-fit">
                         <li><input className="search_input" type="search" name="prospect-search" id="prospect-search" placeholder="Search name or keywords" /></li>
 
                         <li>
                             <div className="dropdown dropdown-end">
                                 <div
                                     tabIndex={0}
-                                    className="border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 p-2.5 shadow focus:shadow-none"
+                                    className="h-full border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 p-[11px] shadow focus:shadow-none"
                                 >
                                     <FaFilter className="text-gray-500" />
                                 </div>
-                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-stone-100 rounded-sm w-52">
+                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-1 shadow bg-stone-100 rounded-sm w-52">
                                     <li><span onClick={() => setFilter("all")}>All</span></li>
                                     <li><span onClick={() => setFilter("approved")}>Approved</span></li>
                                     <li><span onClick={() => setFilter("not approved")}>Not approved</span></li>
