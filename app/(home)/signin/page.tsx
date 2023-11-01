@@ -1,13 +1,20 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Form from "@/app/components/Form";
 
 import { FormField, FETCH_STATUS } from "@/app/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Signin() {
+    const router = useRouter();
+    const { status: signInStatus } = useSession();
+
+    if (signInStatus === "authenticated") {
+        router.push("/dashboard");
+    }
+
     const [error, setError] = useState("");
     const [errorType, setErrorType] = useState("");
     const [data, setData] = useState({
@@ -44,7 +51,6 @@ export default function Signin() {
     ];
 
     const pathname = usePathname();
-    const router = useRouter();
     async function handleSignin(e: FormEvent) {
         e.preventDefault();
         setStatus(FETCH_STATUS.LOADING);
