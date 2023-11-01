@@ -1,11 +1,11 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import Form from "@/app/components/Form";
 
 import { FormField, FETCH_STATUS } from "@/app/types";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Signin() {
     const [error, setError] = useState("");
@@ -49,30 +49,43 @@ export default function Signin() {
         e.preventDefault();
         setStatus(FETCH_STATUS.LOADING);
         try {
-            let res = await signIn("credentials", {
+            const signInOptions = {
                 password: data.password,
                 username: data.username,
-                redirect: false,
+                // redirect: false,
                 callbackUrl: pathname === "/signin" ? "/dashboard" : undefined,
-            });
-            if (!res?.ok) throw res;
+            };
+            signIn("credentials", signInOptions)
+            // let res = await signIn("credentials", signInOptions);
+            // if (!res?.ok) throw res;
 
-            router.push(res.url as string);
+            // router.push(res.url as string);
         } catch (error) {
             setError("Username or password is incorrect");
             setErrorType("error");
             setStatus(FETCH_STATUS.ERROR);
-        } finally {
+        }
+    }
+
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        const signInError = searchParams.get("error");
+        if (typeof signInError === "string") {
+            setError("Username or password is incorrect");
+            setErrorType("error");
+            setStatus(FETCH_STATUS.ERROR);
+
             setTimeout(() => {
                 setStatus(FETCH_STATUS.IDLE);
             }, 2000);
 
             setTimeout(() => {
                 setError("");
-            setErrorType("");
+                setErrorType("");
             }, 5000);
         }
-    }
+    }, []);
 
     return (
         <div className="signin-class">
