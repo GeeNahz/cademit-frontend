@@ -15,24 +15,24 @@ interface ListCardProps {
     link: string;
 }
 
-const ListCard  = ({ title, date, imageUrl, link } : ListCardProps) => {
-  return (
-    <Link href={link} className="flex gap-3 items-start h-max min-w-76 mb-5 p-2">
-        <div className="image h-12 w-12 bg-neutral-content rounded-md overflow-hidden">
-            <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
-        </div>
-        
-        <div className="text-content">
-            <div className="date mb-1">
-                <p className="text-xs font-light text-primary">{ date.toLocaleString()}</p>
+const ListCard = ({ title, date, imageUrl, link }: ListCardProps) => {
+    return (
+        <Link href={link} className="flex gap-3 items-start h-max min-w-76 mb-5 p-2">
+            <div className="image h-12 w-12 bg-neutral-content rounded-md overflow-hidden">
+                <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
             </div>
 
-            <div className="title">
-                <p className="text-base">{ title }</p>
+            <div className="text-content">
+                <div className="date mb-1">
+                    <p className="text-xs font-light text-primary">{date.toLocaleString()}</p>
+                </div>
+
+                <div className="title">
+                    <p className="text-base">{title}</p>
+                </div>
             </div>
-        </div>
-    </Link>
-  )
+        </Link>
+    )
 }
 
 
@@ -142,8 +142,8 @@ export default function Footer() {
                         />
                     </div>
 
-                    <div className="small-text">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum nam facilis eveniet tenetur suscipit veritatis odio, vel ad perferendis doloribus.
+                    <div className="small-text text-justify max-w-[18rem]">
+                        Cademit Enterprise is a registered IT enterprise specializing in Digital Skills education, capacity building, and product development on a mission to build a sustainable startup ecosystem.
                     </div>
 
                     <div className="social-icons flex gap-3 items-center">
