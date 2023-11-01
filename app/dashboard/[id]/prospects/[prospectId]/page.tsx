@@ -1,11 +1,13 @@
 "use client";
 
-import { ProspectRecord } from "@/app/types";
-import { FETCH_STATUS } from "@/utils/status";
-import clsx from "clsx";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+
+import clsx from "clsx";
+
+import { ProspectRecord } from "@/app/types";
+import { FETCH_STATUS } from "@/utils/status";
 
 async function fetchProspect(id: string | number) {
     try {
