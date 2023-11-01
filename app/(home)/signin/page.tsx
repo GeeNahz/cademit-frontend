@@ -76,8 +76,7 @@ export default function Signin() {
     const searchParams = useSearchParams()
 
     useEffect(() => {
-        const signInError = searchParams.get("error");
-        if (typeof signInError === "string") {
+        if (searchParams.has("error")) {
             setError("Username or password is incorrect");
             setErrorType("error");
             setStatus(FETCH_STATUS.ERROR);
