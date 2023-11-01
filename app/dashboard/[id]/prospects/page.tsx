@@ -87,10 +87,13 @@ async function getProspects() {
     }
 }
 
+type ProspectFilterBy = "all" | "approved" | "not approved";
+
 export default function Prospects() {
     const [prospects, setProspects] = useState<ProspectRecord[]>([]);
+    const [userData, setUserData] = useState<ProspectRecord[]>([]);
     const [status, setStatus] = useState(FETCH_STATUS.IDLE);
-
+    // const [filter, setFilter] = useState<ProspectFilterBy>("all");
     const [errorMessage, setErrorMessage] = useState("unable to fetch data. Please reload to try again.");
 
     async function fetchProspects() {
@@ -110,11 +113,34 @@ export default function Prospects() {
         fetchProspects();
     }, []);
 
+    useEffect(() => {
+        setUserData(prospects);
+    }, [prospects]);
+
+
+    function filterProspects(filterBy: ProspectFilterBy) {
+        let prospectList = prospects.filter((prospect: ProspectRecord) => {
+            if (filterBy === "approved") {
+                return prospect.is_approved;
+            } else if (filterBy === "not approved") {
+                return !prospect.is_approved;
+            } else {
+                return prospect;
+            }
+        });
+
+        setUserData(prospectList);
+    }
+
+    function setFilter(filter: ProspectFilterBy) {
+        filterProspects(filter);
+    }
+
     if (status === FETCH_STATUS.LOADING) return (
         <>
             <Header pageTitle="Propects" />
-            <div className="h-full w-full flex items-center justify-center">
-                <p>Fetching data...</p>
+            <div className="h-full w-full flex items-start justify-center pt-56">
+                <p className="text-xl font-semibold blue_gradient">Please wait...</p>
             </div>
         </>
     )
@@ -145,20 +171,18 @@ export default function Prospects() {
                                     <FaFilter className="text-gray-500" />
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-stone-100 rounded-sm w-52">
-                                    <li><span>All</span></li>
-                                    <li><span>Approved</span></li>
-                                    <li><span>Not approved</span></li>
+                                    <li><span onClick={() => setFilter("all")}>All</span></li>
+                                    <li><span onClick={() => setFilter("approved")}>Approved</span></li>
+                                    <li><span onClick={() => setFilter("not approved")}>Not approved</span></li>
                                 </ul>
                             </div>
                         </li>
-
-                        <li className="cursor-pointer "><span title="filter"></span></li>
                     </ul>
                 </nav>
             </Header>
             <div className="flex flex-wrap gap-5">
                 {
-                    prospects.map((prospect: ProspectRecord) => (
+                    userData.map((prospect: ProspectRecord) => (
                         <ProspectCard
                             key={prospect._id}
                             data={{ _id: (prospect._id as string), email: prospect.email, first_name: prospect.first_name, last_name: prospect.last_name, phone: (prospect.phone as string), approved: prospect.is_approved }}
