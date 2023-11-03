@@ -1,4 +1,4 @@
-import { ErrorType } from "@/app/types";
+import BaseService from "./BaseService";
 
 type ApproveProspectPayload = {
   id: string | number | undefined;
@@ -6,28 +6,22 @@ type ApproveProspectPayload = {
 };
 
 export async function approveProspect(data: ApproveProspectPayload) {
-  try {
-    const response = await fetch("/api/v1/prospects/approve", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data),
-  });
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data),
+  };
+  return BaseService("/api/v1/prospects/approve", options);
+}
 
-    if (response.ok) {
-      return await response.json();
-    } else {
-      const error: ErrorType = {
-        status: response.status,
-        statusText: response.statusText,
-        headers: response.headers,
-        errorMessage: await response.text(),
-      };
-
-      throw error;
-    }
-  } catch (error) {
-    throw error;
+export async function prospects(skip?: number, limit?: number) {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   }
+  return await BaseService("/api/v1/prospects", options)
 }
