@@ -54,23 +54,13 @@ export default function Signin() {
     async function handleSignin(e: FormEvent) {
         e.preventDefault();
         setStatus(FETCH_STATUS.LOADING);
-        try {
-            const signInOptions = {
-                password: data.password,
-                username: data.username,
-                // redirect: false,
-                callbackUrl: pathname === "/signin" ? "/dashboard" : undefined,
-            };
-            signIn("credentials", signInOptions)
-            // let res = await signIn("credentials", signInOptions);
-            // if (!res?.ok) throw res;
-
-            // router.push(res.url as string);
-        } catch (error) {
-            setError("Username or password is incorrect");
-            setErrorType("error");
-            setStatus(FETCH_STATUS.ERROR);
-        }
+        const signInOptions = {
+            password: data.password,
+            username: data.username,
+            // redirect: false,
+            callbackUrl: pathname === "/signin" ? "/dashboard" : undefined,
+        };
+        await signIn("credentials", signInOptions)
     }
 
     const searchParams = useSearchParams()
