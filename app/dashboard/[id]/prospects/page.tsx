@@ -147,11 +147,13 @@ export default function Prospects() {
     if (status === FETCH_STATUS.ERROR) return (
         <>
             <Header pageTitle="Propects" />
-            <MessageBox
-                description={errorMessage}
-                messageType="ERROR"
-                onSuccess={async () => await fetchProspects()}
-            />
+            <div className="h-full w-full flex items-start justify-center pt-56">
+                <MessageBox
+                    description={errorMessage}
+                    messageType="ERROR"
+                    onSuccess={async () => await fetchProspects()}
+                />
+            </div>
         </>
     )
 
