@@ -96,7 +96,6 @@ export default function Prospects() {
         } catch (error: any) {
             setStatus(FETCH_STATUS.ERROR);
             setErrorMessage(error.message);
-            console.log(error);
         }
     }
 
