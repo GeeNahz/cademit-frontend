@@ -76,11 +76,7 @@ const handler = NextAuth({
       if (user?.gender) token.gender = user.gender;
       if (user?.image) token.picture = user.image;
       if (user?.email) token.email = user.email;
-      if (user?.is_admin) {
-        token.is_admin = user.is_admin;
-      } else {
-        token.is_admin = false;
-      }
+      if (user?.is_admin) token.is_admin = user.is_admin;
 
       return token;
     },
