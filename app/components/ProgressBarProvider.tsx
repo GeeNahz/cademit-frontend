@@ -10,9 +10,9 @@ export default function ({ children }: { children: React.ReactNode }) {
             {children}
             <ProgressBar
                 shallowRouting
-                options={{ showSpinner: true }}
+                options={{ showSpinner: false }}
                 color="#2185c7"
-                height="4px"
+                height="3px"
             />
         </>
     );
