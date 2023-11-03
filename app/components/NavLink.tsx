@@ -12,7 +12,7 @@ interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
 
 export default function NavLink({ href, exact, children, ...attrs }: NavLinkProps) {
     const pathname = usePathname();
-    const active = " bg-primary-content text-neutral";
+    const active = " bg-primary-focus text-white";
     const isActive = exact ? pathname === href : pathname.startsWith(href);    
 
     if (isActive) {
