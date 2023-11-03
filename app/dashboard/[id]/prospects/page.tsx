@@ -12,6 +12,7 @@ import Header from "../../components/Header";
 import ModalPopup from "@/app/components/ModalPopup";
 import MessageBox from "@/app/components/MessageBox";
 import { FETCH_STATUS } from "@/utils/status";
+import { prospects } from "@/services/ProspectService";
 
 type ProspectData = {
     _id: string;
@@ -70,18 +71,8 @@ function ProspectCard({ data }: ProspectCardProps) {
 
 async function getProspects() {
     try {
-        const response = await fetch("/api/v1/prospects", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (response.ok) {
-            return response.json()
-        } else {
-            throw new Error(`${response.statusText}`);
-        }
+        const response = await prospects()
+        return response;
     } catch (error) {
         throw new Error(`${error}`);
     }
