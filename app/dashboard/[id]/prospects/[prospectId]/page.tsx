@@ -9,6 +9,7 @@ import clsx from "clsx";
 
 import { ProspectRecord } from "@/app/types";
 import { FETCH_STATUS } from "@/utils/status";
+import { approveProspect } from "@/services/ProspectService";
 
 async function fetchProspect(id: string | number) {
     try {
@@ -56,20 +57,8 @@ export default function ProspectDetails({ params }: { params: { prospectId: stri
         };
 
         try {
-            const response = await fetch("/api/v1/prospects/approve", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload),
-            });
-
-            if (response.ok) {
-                setDetails(await response.json());
-                setStatus(FETCH_STATUS.SUCCESS);
-            } else {
-                throw new Error(`${response.statusText}`);
-            }
+            const response = await approveProspect(payload);
+            setDetails(response);
         } catch (error) {
             setStatus(FETCH_STATUS.ERROR)
             console.log(error);
