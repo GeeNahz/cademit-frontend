@@ -8,7 +8,7 @@ import Form from "@/app/components/Form";
 
 import { ErrorType, FormField, Gender, StatusType, User } from "@/app/types";
 import { FETCH_STATUS } from "@/utils/status";
-import { registerUser } from "@/services/RegisterService";
+import { registerUser } from "@/services/AuthService";
 import ModalPopup from "@/app/components/ModalPopup";
 import MessageBox from "@/app/components/MessageBox";
 
