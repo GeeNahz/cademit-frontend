@@ -184,7 +184,7 @@ export default function ProspectDetails({ params }: { params: { prospectId: stri
                         </div>
                     </div>)
                     : (<div className="h-full w-full flex items-start justify-center pt-56">
-                        <p className="text-xl font-semibold blue_gradient">Please wait...</p>
+                        <p className="text-xl font-semibold font-lora italic">Please wait...</p>
                     </div>)
             }
         </div>
