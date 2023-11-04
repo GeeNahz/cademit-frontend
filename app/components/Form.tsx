@@ -71,9 +71,9 @@ export default function Form({ type, header, footer, desc, fields, submitting, d
                 <form
                     ref={formEl}
                     onSubmit={handleSubmit}
-                    className={divideClass + " mt-10 mb-5 w-full max-w-2xl flex flex-col gap-5 glassmorphism"}
+                    className={divideClass + " mt-10 mb-5 w-full max-w-2xl glassmorphism"}
                 >
-                    <div className="form">
+                    <div className="form w-full mb-8 flex flex-col gap-5">
                         {
                             fields.map((field, index) => generateFormFields(field, data, setData, index))
                         }
