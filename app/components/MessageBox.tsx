@@ -37,7 +37,7 @@ export default function MessageBox({
     );
 
     const btnTheme = clsx(
-        "text-white border-0 underline underline-offset-4 transition-colors",
+        "border-0 underline underline-offset-4 transition-colors",
         {
             "text-teal-900 hover:text-teal-600": FETCH_STATUS[messageType] === FETCH_STATUS.SUCCESS,
             "text-red-700 hover:text-red-400": FETCH_STATUS[messageType] === FETCH_STATUS.ERROR,
