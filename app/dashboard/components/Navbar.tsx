@@ -30,7 +30,7 @@ export default function Navbar() {
       </div>
 
       <div className="user-profile flex gap-3 items-center text-sm">
-        <p className="profile-email font-normal text-stone-500">{session?.user.email}</p>
+        <p className="profile-email font-normal text-stone-500">{session?.user.name}</p>
         <button onClick={() => signOut()} className="text-red-700 hover:text-red-500 hover:underline hover:underline-offset-2 transition-all duration-200 font-normal">Sign out</button>
         <div className={genderStyle}>
           <div className="bg-white w-full h-full rounded-full">
