@@ -9,6 +9,7 @@ import { generateFormFields } from "@/utils/forms";
 
 type FormProps = {
     header?: string;
+    footer?: string | React.ReactNode;
     desc?: string;
     message?: string;
     messageType?: string;
@@ -20,7 +21,7 @@ type FormProps = {
     handleSubmit: (e: FormEvent) => any;
 };
 
-export default function Form({ type, header, desc, fields, submitting, data, message, messageType, setData, handleSubmit, }: FormProps) {
+export default function Form({ type, header, footer, desc, fields, submitting, data, message, messageType, setData, handleSubmit, }: FormProps) {
     const formEl = useRef<HTMLFormElement>(null);
 
     const [isValid, setIsValid] = useState(false);
@@ -49,37 +50,51 @@ export default function Form({ type, header, desc, fields, submitting, data, mes
         },
     );
 
+    const divideClass = clsx(
+        {
+            "divide-y": footer,
+        }
+    );
+
     return (
         <div className="w-full max-w-full my-10 flex items-center flex-col">
-            <h1 className="head_text font-satoshi text-left">
-                <span className="blue_gradient">{header ? header : `${type} Profile`}</span>
-            </h1>
-            <p className="desc text-center max-w-xs">
-                {desc ? desc : `${type} your profile.`}
-            </p>
+            <div className="header">
+                <h1 className="head_text font-satoshi text-left">
+                    <span className="blue_gradient">{header ? header : `${type} Profile`}</span>
+                </h1>
+                <p className="desc text-center max-w-xs">
+                    {desc ? desc : `${type} your profile.`}
+                </p>
+            </div>
 
-            <form
-                ref={formEl}
-                onSubmit={handleSubmit}
-                className="mt-10 w-full max-w-2xl flex flex-col gap-5 glassmorphism"
-            >
-                {
-                    fields.map((field, index) => generateFormFields(field, data, setData, index))
-                }
+            <div className={divideClass + " w-full h-full flex items-center flex-col"}>
+                <form
+                    ref={formEl}
+                    onSubmit={handleSubmit}
+                    className={divideClass + " mt-10 mb-5 w-full max-w-2xl flex flex-col gap-5 glassmorphism"}
+                >
+                    <div className="form">
+                        {
+                            fields.map((field, index) => generateFormFields(field, data, setData, index))
+                        }
 
-                {
-                    message &&
-                    <div className={messageStyle}>
-                        <p>{message}</p>
+                        {
+                            message &&
+                            <div className={messageStyle}>
+                                <p>{message}</p>
+                            </div>
+                        }
+
+                        <div className="mt-4 gap-4 w-full">
+                            <button type="submit" disabled={submitting} className={btnStyle}>
+                                {submitting ? <i>{type}...</i> : `${type}`}
+                            </button>
+                        </div>
                     </div>
-                }
 
-                <div className="mt-4 gap-4 w-full">
-                    <button type="submit" disabled={submitting} className={btnStyle}>
-                        {submitting ? <i>{type}...</i> : `${type}`}
-                    </button>
-                </div>
-            </form>
+                    <div className="footer pt-5 w-full">{footer}</div>
+                </form>
+            </div>
         </div>
     );
 }
