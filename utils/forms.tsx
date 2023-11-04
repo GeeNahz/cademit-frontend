@@ -51,7 +51,7 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
                             }}
                             className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
                         >
-                            {passwordType === "password" ? <FaEye className="text-gray-500" /> : <FaEyeSlash className="text-gray-500" />}
+                            {passwordType === "password" ? <FaEyeSlash className="text-stone-400" /> : <FaEye className="text-stone-400" />}
                         </span>
 
                     </div>
