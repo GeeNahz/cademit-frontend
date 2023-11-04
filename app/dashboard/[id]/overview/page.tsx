@@ -42,7 +42,7 @@ export default function Overview() {
   const [status, setStatus] = useState(FETCH_STATUS.IDLE);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [prospects, setProspects] = useState<any[]>([]);
+  const [prospects, setProspects] = useState<any[]>();
 
   async function fetchProspects() {
     setStatus(FETCH_STATUS.LOADING);
