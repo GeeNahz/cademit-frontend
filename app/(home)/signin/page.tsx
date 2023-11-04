@@ -6,6 +6,15 @@ import Form from "@/app/components/Form";
 
 import { FormField, FETCH_STATUS } from "@/app/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+
+function SignInFooter() {
+    return (
+        <div className="flex flex-col items-end w-full">
+            <Link className="link text-right hover:link-hover" href="/auth/password-reset">Forgot password</Link>
+        </div>
+    );
+}
 
 export default function Signin() {
     const router = useRouter();
@@ -95,6 +104,7 @@ export default function Signin() {
                 desc="Sign in to your account"
                 message={error}
                 messageType={errorType}
+                footer={<SignInFooter />}
             />
         </div>
     );
