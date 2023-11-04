@@ -10,8 +10,8 @@ import Link from "next/link";
 
 function SignInFooter() {
     return (
-        <div className="flex flex-col items-end w-full">
-            <Link className="link text-right hover:link-hover" href="/auth/password-reset">Forgot password</Link>
+        <div className="flex flex-col items-end w-full font-medium">
+            <Link className="link text-blue-800 hover:text-blue-500 transition-colors" href="/auth/password-reset">Forgot password</Link>
         </div>
     );
 }
