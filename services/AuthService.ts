@@ -20,9 +20,7 @@ type PasswordResetType = {
   confirmPassword: string;
 };
 export async function resetPassword(data: PasswordResetType) {
-  if (data.password !== data.confirmPassword) {
-    console.log("I RAN");
-    
+  if (data.password !== data.confirmPassword) {    
     throw {
       status: status.HTTP_400_BAD_REQUEST,
       statusText: "Bad Request",
