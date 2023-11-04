@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 
 import Form from "@/app/components/Form";
 
