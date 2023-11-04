@@ -1,12 +1,14 @@
 import { FormField, FormSelectOptions, INPUT_TYPES } from "@/app/types";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<SetStateAction<any>>, index: string | number) {
+    const [passwordType, setPasswordType] = useState("password");
     switch (field.type) {
         case INPUT_TYPES.TEXT:
         case INPUT_TYPES.EMAIL:
         case INPUT_TYPES.TEL:
-        case INPUT_TYPES.PASSWORD:
             return (
                 <label key={field.fieldName} htmlFor={field.fieldProps?.id} className="w-full">
                     <span className="font-satoshi font-semibold text-base text-gray-700">
@@ -22,6 +24,37 @@ function generateFormFields(field: FormField, data: {} | any, setData: Dispatch<
                         required={field.fieldProps?.required}
                         className="form_input"
                     />
+                </label>
+            );
+        case INPUT_TYPES.PASSWORD:
+            return (
+                <label key={field.fieldName} htmlFor={field.fieldProps?.id} className="w-full">
+                    <span className="font-satoshi font-semibold text-base text-gray-700">
+                        {field.label} {field.fieldProps?.required ? <span className="text-red-400">*</span> : null}
+                    </span>
+
+                    <div className="relative w-full h-full">
+                        <input
+                            type={passwordType}
+                            id={field.fieldProps?.id}
+                            value={(field.value as string | number)}
+                            onChange={(e) => setData({ ...data, [field.fieldName]: e.target.value })}
+                            placeholder={field.fieldProps?.placeholder}
+                            required={field.fieldProps?.required}
+                            className="form_input relative"
+                        />
+                        <span
+                            onClick={() => {
+                                passwordType === "password"
+                                    ? setPasswordType("text")
+                                    : setPasswordType("password")
+                            }}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
+                        >
+                            {passwordType === "password" ? <FaEye className="text-gray-500" /> : <FaEyeSlash className="text-gray-500" />}
+                        </span>
+
+                    </div>
                 </label>
             );
         case INPUT_TYPES.TEXTAREA:
