@@ -15,7 +15,7 @@ export default function DashboardBaseLayout({
                 <div className="main-wrapper flex w-full">
                     <Sidebar />
                     <main className='flex-1 max-w-[calc(100%-300px)] flex w-full min-h-[calc(100vh-3.75rem)] h-full overflow-hidden'>
-                        <div className="main-container max-h-[calc(100vh-3.75rem)] w-full overflow-y-scroll p-4">
+                        <div className="main-container max-h-[calc(100vh-3.75rem)] w-full overflow-y-scroll px-4">
                             {children}
                         </div>
                     </main>
