@@ -186,20 +186,18 @@ export default function Prospects() {
                         <ul className="flex gap-3 justify-center w-fit h-fit">
                             <li><input className="search_input" type="search" name="prospect-search" id="prospect-search" placeholder="Search name or keywords" /></li>
 
-                            <li>
-                                <div className="dropdown dropdown-end">
-                                    <div
-                                        tabIndex={0}
-                                        className="h-full border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 p-[11px] shadow focus:shadow-none"
-                                    >
-                                        <FaFilter className="text-gray-500" />
-                                    </div>
-                                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-1 shadow bg-stone-100 rounded-sm w-52">
-                                        <li><span onClick={() => setFilter("all")}>All</span></li>
-                                        <li><span onClick={() => setFilter("approved")}>Approved</span></li>
-                                        <li><span onClick={() => setFilter("not approved")}>Not approved</span></li>
-                                    </ul>
+                            <li className="dropdown dropdown-end">
+                                <div
+                                    tabIndex={0}
+                                    className="h-full border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 p-[11px] shadow focus:shadow-none"
+                                >
+                                    <FaFilter className="text-gray-500" />
                                 </div>
+                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-1 shadow bg-stone-100 rounded-sm w-52">
+                                    <li><span onClick={() => setFilter("all")}>All</span></li>
+                                    <li><span onClick={() => setFilter("approved")}>Approved</span></li>
+                                    <li><span onClick={() => setFilter("not approved")}>Not approved</span></li>
+                                </ul>
                             </li>
 
                             <li className="h-full p-3 text-gray-500 border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 shadow focus:shadow-none" title="export current data" tabIndex={1} onClick={handleDownloadRecord}>
