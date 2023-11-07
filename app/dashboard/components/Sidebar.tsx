@@ -28,7 +28,7 @@ const Sidebar = () => {
                             </NavLink>
                         </li>
                         <li className="hover:bg-zinc-200 rounded-l-md overflow-hidden transition-colors mt-1 flex flex-wrap relative rounded-sm">
-                            <NavLink className="flex-1 py-[0.55rem] px-3 leading-[1.25] flex items-center text-gray-500" href={`/dashboard/${session?.user.id as string}/prospects`}>
+                            <NavLink className="flex-1 py-[0.55rem] px-3 leading-[1.25] flex items-center text-gray-500" href={`/dashboard/${session?.user.id as string}/prospects?skip=0&limit=10`}>
                                 <span className="flex-1">Prospects</span>
                             </NavLink>
                         </li>
