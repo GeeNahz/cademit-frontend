@@ -136,3 +136,11 @@ export type ErrorType = {
   errorMessage: string;
   headers: {[key: string]: any};
 };
+
+export type APIResponse = {
+  count?: number;
+  status?: number;
+  statusText?: string;
+  links?: {[key: string]: any};
+  results: any[] | {[key: string]: any};
+};
