@@ -70,9 +70,11 @@ function ProspectCard({ data }: ProspectCardProps) {
 }
 
 
-async function getProspects(skip = 0, limit = 10, userId?: string) {
+// async function getProspects(skip = 0, limit = 10, userId?: string) {
+async function getProspects() {
     try {
-        const response = await prospects(skip, limit, userId);
+        // const response = await prospects(skip, limit, userId);
+        const response = await prospects();
         return response;
     } catch (error) {
         throw error;
@@ -98,7 +100,8 @@ export default function Prospects() {
         let userId = session?.user.id
         
         try {
-            const data = await getProspects(skip, limit, userId);
+            // const data = await getProspects(skip, limit, userId);
+            const data = await getProspects();
             setResponseData(data as any);
 
             setProspects(data.results as ProspectRecord[]);
