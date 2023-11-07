@@ -8,6 +8,7 @@ import { FETCH_STATUS } from "@/utils/status";
 import { prospects } from "@/services/ProspectService";
 
 import Header from "../../components/Header"
+import { ProspectRecord } from "@/app/types";
 
 
 type OverviewCardProps = {
@@ -48,7 +49,7 @@ export default function Overview() {
     setStatus(FETCH_STATUS.LOADING);
     try {
       const data = await getProspects();
-      setProspects(data);
+      setProspects(data.results as ProspectRecord[]);
       setStatus(FETCH_STATUS.SUCCESS);
     } catch (error: any) {
       setStatus(FETCH_STATUS.ERROR);
