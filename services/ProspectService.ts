@@ -1,3 +1,4 @@
+import { APIResponse } from "@/app/types";
 import BaseService from "./BaseService";
 
 type ApproveProspectPayload = {
@@ -16,12 +17,14 @@ export async function approveProspect(data: ApproveProspectPayload) {
   return BaseService("/api/v1/prospects/approve", options);
 }
 
-export async function prospects(skip?: number, limit?: number) {
+export async function prospects(skip?: number, limit?: number, userId?: string): Promise<APIResponse> {
   const options = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-  }
-  return await BaseService("/api/v1/prospects", options)
+  }  
+  const response: APIResponse = await BaseService(`/api/v1/prospects?skip=${skip}&limit=${limit}&user-id=${userId}`, options);
+
+  return response;
 }
