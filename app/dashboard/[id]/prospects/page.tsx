@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { FaEnvelope, FaPhone, FaFilter, FaFilterCircleXmark } from "react-icons/fa6"
+import { FaEnvelope, FaPhone, FaFilter, FaAngleLeft, FaAngleRight } from "react-icons/fa6"
 
-import { ProspectRecord } from "@/app/types";
+import { APIResponse, ProspectRecord } from "@/app/types";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Header from "../../components/Header";
@@ -13,6 +13,7 @@ import ModalPopup from "@/app/components/ModalPopup";
 import MessageBox from "@/app/components/MessageBox";
 import { FETCH_STATUS } from "@/utils/status";
 import { prospects } from "@/services/ProspectService";
+import { useSearchParams } from "next/navigation";
 
 type ProspectData = {
     _id: string;
@@ -30,7 +31,7 @@ function ProspectCard({ data }: ProspectCardProps) {
     const { data: session } = useSession();
 
     const statusColor = clsx(
-        "relative max-w-md w-80 shadow rounded-md p-5 bg-white border-t-8",
+        "relative max-w-md w-80 shadow rounded-md p-5 bg-white border-t-8 h-fit",
         {
             "border-primary": data.approved,
             "border-error": !data.approved,
@@ -69,29 +70,38 @@ function ProspectCard({ data }: ProspectCardProps) {
 }
 
 
-async function getProspects() {
+async function getProspects(skip = 0, limit = 10, userId?: string) {
     try {
-        const response = await prospects()
+        const response = await prospects(skip, limit, userId);
         return response;
     } catch (error) {
-        throw new Error(`${error}`);
+        throw error;
     }
 }
 
 type ProspectFilterBy = "all" | "approved" | "not approved";
 
 export default function Prospects() {
+    const { data: session } = useSession();
+
+    const [responseData, setResponseData] = useState<APIResponse>();
     const [prospects, setProspects] = useState<ProspectRecord[]>([]);
     const [userData, setUserData] = useState<ProspectRecord[]>([]);
     const [status, setStatus] = useState(FETCH_STATUS.IDLE);
-    // const [filter, setFilter] = useState<ProspectFilterBy>("all");
     const [errorMessage, setErrorMessage] = useState("unable to fetch data. Please reload to try again.");
 
+    const searchParams = useSearchParams();
     async function fetchProspects() {
         setStatus(FETCH_STATUS.LOADING);
+        let skip = parseInt(searchParams.get("skip") as string) || 0;
+        let limit = parseInt(searchParams.get("limit") as string) || 10;
+        let userId = session?.user.id
+        
         try {
-            const data = await getProspects();
-            setProspects(data);
+            const data = await getProspects(skip, limit, userId);
+            setResponseData(data as any);
+
+            setProspects(data.results as ProspectRecord[]);
             setStatus(FETCH_STATUS.SUCCESS);
         } catch (error: any) {
             setStatus(FETCH_STATUS.ERROR);
@@ -101,7 +111,7 @@ export default function Prospects() {
 
     useEffect(() => {
         fetchProspects();
-    }, []);
+    }, [searchParams]);
 
     useEffect(() => {
         setUserData(prospects);
@@ -147,32 +157,45 @@ export default function Prospects() {
         </>
     )
 
-    return (
-        <>
-            <Header pageTitle="Propects">
-                <nav>
-                    <ul className="flex gap-3 justify-center w-fit h-fit">
-                        <li><input className="search_input" type="search" name="prospect-search" id="prospect-search" placeholder="Search name or keywords" /></li>
+    const prevLinkStyle = clsx(
+        {
+            "opacity-50 pointer-events-none": !responseData?.links?.previous.href
+        },
+    );
+    const nextLinkStyle = clsx(
+        {
+            "opacity-50 pointer-events-none": !responseData?.links?.next.href
+        },
+    );
 
-                        <li>
-                            <div className="dropdown dropdown-end">
-                                <div
-                                    tabIndex={0}
-                                    className="h-full border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 p-[11px] shadow focus:shadow-none"
-                                >
-                                    <FaFilter className="text-gray-500" />
+    return (
+        <div className="min-h-full flex flex-col">
+            <section className="header sticky -top-0 z-20 bg-inherit bg-stone-50">
+                <Header pageTitle="Propects">
+                    <nav>
+                        <ul className="flex gap-3 justify-center w-fit h-fit">
+                            <li><input className="search_input" type="search" name="prospect-search" id="prospect-search" placeholder="Search name or keywords" /></li>
+
+                            <li>
+                                <div className="dropdown dropdown-end">
+                                    <div
+                                        tabIndex={0}
+                                        className="h-full border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 p-[11px] shadow focus:shadow-none"
+                                    >
+                                        <FaFilter className="text-gray-500" />
+                                    </div>
+                                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-1 shadow bg-stone-100 rounded-sm w-52">
+                                        <li><span onClick={() => setFilter("all")}>All</span></li>
+                                        <li><span onClick={() => setFilter("approved")}>Approved</span></li>
+                                        <li><span onClick={() => setFilter("not approved")}>Not approved</span></li>
+                                    </ul>
                                 </div>
-                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-1 shadow bg-stone-100 rounded-sm w-52">
-                                    <li><span onClick={() => setFilter("all")}>All</span></li>
-                                    <li><span onClick={() => setFilter("approved")}>Approved</span></li>
-                                    <li><span onClick={() => setFilter("not approved")}>Not approved</span></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-            </Header>
-            <div className="flex flex-wrap gap-5">
+                            </li>
+                        </ul>
+                    </nav>
+                </Header>
+            </section>
+            <section className="flex flex-wrap gap-5 px-3 pb-3 min-h-full overflow-scroll flex-1">
                 {
                     userData.map((prospect: ProspectRecord) => (
                         <ProspectCard
@@ -181,7 +204,15 @@ export default function Prospects() {
                         />
                     ))
                 }
-            </div>
-        </>
+            </section>
+            {/* <section className="footer sticky bottom-0 h-fit bg-stone-50">
+                <div className="h-12 border-t border-stone-300 w-full flex gap-10 justify-end items-center">
+                    <div className="join">
+                        <Link href={responseData?.links?.previous.href || "#"} className={"join-item shadow p-3 hover:bg-sky-300 transition-all cursor-pointer " + prevLinkStyle}><FaAngleLeft /></Link>
+                        <Link href={responseData?.links?.next.href || "#"} className={"join-item shadow p-3 hover:bg-sky-300 transition-all cursor-pointer " + nextLinkStyle}><FaAngleRight /></Link>
+                    </div>
+                </div>
+            </section> */}
+        </div>
     )
 }
