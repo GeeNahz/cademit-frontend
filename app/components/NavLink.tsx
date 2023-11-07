@@ -12,8 +12,9 @@ interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
 
 export default function NavLink({ href, exact, children, ...attrs }: NavLinkProps) {
     const pathname = usePathname();
+    let url = href.split("?")[0];    
     const active = " bg-primary-focus text-white";
-    const isActive = exact ? pathname === href : pathname.startsWith(href);    
+    const isActive = exact ? pathname === href : pathname.startsWith(url);
 
     if (isActive) {
         attrs.className += active;
