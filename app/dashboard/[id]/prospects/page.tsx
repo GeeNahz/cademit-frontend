@@ -1,19 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-import { FaEnvelope, FaPhone, FaFilter, FaAngleLeft, FaAngleRight } from "react-icons/fa6"
+import { FaEnvelope, FaPhone, FaFilter, FaAngleLeft, FaAngleRight, FaFileExport } from "react-icons/fa6"
+import clsx from "clsx";
+import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { APIResponse, ProspectRecord } from "@/app/types";
-import clsx from "clsx";
-import { useSession } from "next-auth/react";
-import Header from "../../components/Header";
-import ModalPopup from "@/app/components/ModalPopup";
-import MessageBox from "@/app/components/MessageBox";
+import { exportDataToCSV } from "@/app/hooks/jsonToCSV";
 import { FETCH_STATUS } from "@/utils/status";
 import { prospects } from "@/services/ProspectService";
-import { useSearchParams } from "next/navigation";
+
+import Header from "../../components/Header";
+import MessageBox from "@/app/components/MessageBox";
+import ModalPopup from "@/app/components/ModalPopup";
+
 
 type ProspectData = {
     _id: string;
@@ -98,7 +101,7 @@ export default function Prospects() {
         let skip = parseInt(searchParams.get("skip") as string) || 0;
         let limit = parseInt(searchParams.get("limit") as string) || 10;
         let userId = session?.user.id
-        
+
         try {
             // const data = await getProspects(skip, limit, userId);
             const data = await getProspects();
@@ -171,6 +174,10 @@ export default function Prospects() {
         },
     );
 
+    function handleDownloadRecord() {
+        exportDataToCSV(userData, "prospects");
+    }
+
     return (
         <div className="min-h-full flex flex-col">
             <section className="header sticky -top-0 z-20 bg-inherit bg-stone-50">
@@ -193,6 +200,10 @@ export default function Prospects() {
                                         <li><span onClick={() => setFilter("not approved")}>Not approved</span></li>
                                     </ul>
                                 </div>
+                            </li>
+
+                            <li className="h-full p-3 text-gray-500 border border-gray-200 rounded hover:border-gray-300 hover:bg-stone-200 focus:bg-stone-200 transition-colors duration-200 shadow focus:shadow-none" title="export current data" tabIndex={1} onClick={handleDownloadRecord}>
+                                <FaFileExport />
                             </li>
                         </ul>
                     </nav>
