@@ -47,46 +47,46 @@ export default function AboutPage() {
   const teamMembers: TeamData[] = [
     {
       id: 1,
-      name: "John Smith",
-      imageUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWVuJTIwcHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+      name: "Okanlawon Israel",
+      imageUrl: "/images/profile-pictures/founder-pic.jpg",
       contact: {
-        email: "smithj@mail.com",
+        email: "",
       },
       role: "Founder",
-      note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, aspernatur.",
+      note: "",
     },
-    {
-      id: 2,
-      name: "Stacy Simon",
-      imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      contact: {
-        email: "stamon@mail.com",
-      },
-      role: "COO and Creative Director",
-      note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, aspernatur. Dolor sit consectetur adipisicing elit. Quas, aspernatur.",
-    },
-    {
-      id: 3,
-      name: "Andrew Carter",
-      imageUrl: "https://images.unsplash.com/photo-1649057349440-38c14e985208?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fG1lbiUyMHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-      contact: {
-        email: "adnee-c@mail.com",
-      },
-      role: "Director of Design",
-      position: "UI/UX Designer",
-      note: "Lorem sit amet consectetur adipisicing elit. Quas, aspernatur.",
-    },
-    {
-      id: 4,
-      name: "Lusy Hassan",
-      imageUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      contact: {
-        email: "Lussan@mail.com",
-      },
-      role: "Director of Web Development",
-      position: "Backend Developer",
-      note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, aspernatur.",
-    },
+    // {
+    //   id: 2,
+    //   name: "Stacy Simon",
+    //   imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    //   contact: {
+    //     email: "stamon@mail.com",
+    //   },
+    //   role: "COO and Creative Director",
+    //   note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, aspernatur. Dolor sit consectetur adipisicing elit. Quas, aspernatur.",
+    // },
+    // {
+    //   id: 3,
+    //   name: "Andrew Carter",
+    //   imageUrl: "https://images.unsplash.com/photo-1649057349440-38c14e985208?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fG1lbiUyMHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+    //   contact: {
+    //     email: "adnee-c@mail.com",
+    //   },
+    //   role: "Director of Design",
+    //   position: "UI/UX Designer",
+    //   note: "Lorem sit amet consectetur adipisicing elit. Quas, aspernatur.",
+    // },
+    // {
+    //   id: 4,
+    //   name: "Lusy Hassan",
+    //   imageUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    //   contact: {
+    //     email: "Lussan@mail.com",
+    //   },
+    //   role: "Director of Web Development",
+    //   position: "Backend Developer",
+    //   note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, aspernatur.",
+    // },
   ];
 
   return (
